@@ -1,0 +1,27 @@
+<ion-content padding class="login-bg">
+<ion-toolbar class="login-h-bg">
+  <ion-buttons slot="start">
+    <ion-back-button color = "light" defaultHref="slider"></ion-back-button>
+  </ion-buttons>
+</ion-toolbar>
+  <div>
+    <div class="logo-card">
+      <ion-card-content>
+        <ion-icon color = 'light' class="logo" name="planet"></ion-icon>
+        <div class="login-name">SIGN IN </div>
+      </ion-card-content>
+    </div>
+    <div padding class="login-form">
+      <form [formGroup]="fgroup" (ngSubmit)="login()" #frm="ngForm">
+        <input required spellcheck="false" autocorrect="off" autocapitalize="none" type="text" placeholder="Email" formControlName="username">
+        <input required type="password" placeholder="Password" formControlName="password">
+        <ion-button color="tertiary" expand="full" [disabled]="frm.invalid" type="submit" shape="round"> SIGN IN
+        </ion-button>
+      </form>
+      <ion-button class="google-btn" (click)="LoginWithGoogle()" color="light" expand="full" type="submit">
+        <ion-icon color="danger" slot="start" name="logo-google"></ion-icon> SIGN IN WITH
+        GOOGLE
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

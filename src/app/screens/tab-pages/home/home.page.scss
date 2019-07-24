@@ -1,0 +1,122 @@
+.home-h-bg{
+  --background: var(--ion-toolbar-background,#6e2f94);
+}
+.searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios {
+  padding-left: 30px;
+  background-color: white;
+}
+// ion-spinner {
+//   --background-color: rebeccapurple;
+//   }
+.refresh{
+  --background-color: #633ce0;
+  }
+ion-content{
+  --background: -moz-linear-gradient(64deg, rgba(242,242,242,1) 0%, rgba(242,242,242,1) 49%, rgba(163,41,118,1) 50%, rgba(149,42,125,1) 57%, rgba(110,47,148,1) 77%); /* ff3.6+ */
+  --background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(242,242,242,1)), color-stop(49%, rgba(242,242,242,1)), color-stop(50%, rgba(163,41,118,1)), color-stop(57%, rgba(149,42,125,1)), color-stop(77%, rgba(110,47,148,1))); /* safari4+,chrome */
+  --background: -webkit-linear-gradient(64deg, rgba(242,242,242,1) 0%, rgba(242,242,242,1) 49%, rgba(163,41,118,1) 50%, rgba(149,42,125,1) 57%, rgba(110,47,148,1) 77%); /* safari5.1+,chrome10+ */
+  --background: -o-linear-gradient(64deg, rgba(242,242,242,1) 0%, rgba(242,242,242,1) 49%, rgba(163,41,118,1) 50%, rgba(149,42,125,1) 57%, rgba(110,47,148,1) 77%); /* opera 11.10+ */
+  --background: -ms-linear-gradient(64deg, rgba(242,242,242,1) 0%, rgba(242,242,242,1) 49%, rgba(163,41,118,1) 50%, rgba(149,42,125,1) 57%, rgba(110,47,148,1) 77%); /* ie10+ */
+  --background: linear-gradient(26deg, rgba(242,242,242,1) 0%, rgba(242,242,242,1) 55%, rgba(163,41,118,1) 50%, rgba(149,42,125,1) 57%, rgba(110,47,148,1) 77%); /* w3c */
+  --filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e2f94', endColorstr='#F2F2F2',GradientType=0 ); /* ie6-9 */
+}
+.f-icon{
+  color: white;
+  font-size: 18px;
+}
+.lb-welcome{
+  color: white;
+  line-height: 0px;
+  font-size: 20px;
+  margin: 12px 0px;
+  text-align: center;
+}
+// ion-content{
+//   --padding-start: 10px;
+// }
+.card-list{
+  width: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+}
+.card-content-ios {
+  padding: 20px 6px;
+}
+  .date-card{
+    margin-top: 94px;
+    position: absolute;
+    background: blueviolet;
+    color: white;
+    margin-left: 5px;
+    padding: 0%;
+    text-align: center;
+    height: 40px;
+    line-height: 0;
+    width: 40px;
+    border-radius: 3px;
+  }
+  .even-custom-card{
+    min-width: 70%;
+    max-height: 220px;
+    min-height: 220px;
+  }
+  .event-name{
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .mkt-custom-card{
+    min-width: 40%;
+    max-width: 40%;
+    max-height: 220px;
+    min-height: 220px;
+  }
+  .price{
+    font-size: 14px;
+    font-weight: bold;
+    color: #da0a5b;
+  }
+  .discount-price{
+    font-size: 10px;
+  }
+  .promo-price{
+    font-weight: bold;
+    text-decoration: line-through;
+  }
+  .card-text{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: gray;
+  }
+  .sc-ion-card-ios-h{
+    margin: 10px 8px;
+  }
+  .event-card-img{
+    object-fit: cover;
+    max-height:140px;
+    min-height: 140px;
+  }
+.custom-event-section{
+  height: 270px;
+} 
+
+.up-coming-event-t{
+  // color: #5f00b8;
+  margin-left: 7px;
+  color: white;
+  font-weight: bold;
+}
+.up-coming-mkt-t{
+  margin-left: 7px;
+  color: #633ce0;
+  font-weight: bold;
+}
+
+.custom-new-section{
+  margin-top: 10px;
+}

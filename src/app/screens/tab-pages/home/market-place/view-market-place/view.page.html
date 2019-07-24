@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar class="home-h-bg">
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light"> View Market Place </ion-title>
+    <ion-buttons slot="end">
+      <ion-icon size="large" color="light" name="cart"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="list">
+  <img class="event-img" [src]="blankImage(list.picture)">
+  <div class="details">
+      <p>
+          <strong>{{list.item_name | titlecase}}</strong>
+      </p>
+    <span class="price">RM {{list.price}}</span>&nbsp;
+      <h5>
+        <strong>Descriptions</strong>
+      </h5>
+      <div class="desc">
+          {{list.desc}}
+      </div>
+  </div>
+</ion-content>
+<ion-button color="danger" expand="full">BUY NOW</ion-button>

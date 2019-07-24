@@ -1,0 +1,36 @@
+.slider-bg{
+--background: rgba(109,47,148,1);
+--background: -moz-linear-gradient(-45deg, rgba(109,47,148,1) 0%, rgba(218,10,90,1) 96%, rgba(218,10,90,1) 100%);
+--background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(109,47,148,1)), color-stop(96%, rgba(218,10,90,1)), color-stop(100%, rgba(218,10,90,1)));
+--background: -webkit-linear-gradient(-45deg, rgba(109,47,148,1) 0%, rgba(218,10,90,1) 96%, rgba(218,10,90,1) 100%);
+--background: -o-linear-gradient(-45deg, rgba(109,47,148,1) 0%, rgba(218,10,90,1) 96%, rgba(218,10,90,1) 100%);
+--background: -ms-linear-gradient(-45deg, rgba(109,47,148,1) 0%, rgba(218,10,90,1) 96%, rgba(218,10,90,1) 100%);
+--background: linear-gradient(135deg, rgba(109,47,148,1) 0%, rgba(218,10,90,1) 96%, rgba(218,10,90,1) 100%);
+--filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d2f94', endColorstr='#da0a5a', GradientType=1 );   
+
+   }
+.slides{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    display: block!important;
+}
+ion-slide{
+    display: block!important;
+}
+.logo-card{
+    width: 100%;
+    text-align: center;
+}
+.logo{
+    width: 180px;
+    height: 180px;
+}
+.app-name{
+    text-align: center;
+    font-size: 33px;
+    font-weight: bolder;
+    color: white;
+}
+.sign-up-btn{
+    margin-top: 20px;
+}

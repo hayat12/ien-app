@@ -1,0 +1,20 @@
+.pp-img-card{
+    margin: auto;
+    max-width: 60%!important;
+    max-height: 70%!important;
+    padding: 10%;
+}
+
+.pp-img-card>img{
+    border-radius:100%;
+}
+.sub-interest{
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center;
+}
+
+.active{
+    background-color: blueviolet;
+    color: white;
+}

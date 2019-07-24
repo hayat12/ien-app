@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar class="home-h-bg">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-searchbar color="light" class="search-input" (click)="goSearch()"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button>
+        <i class="fa fa-id-card f-icon" aria-hidden="true"></i>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item lines="none" text-wrap>
+    <ion-fab slot="start">
+      <span class="ca-name">Calendar</span>
+    </ion-fab>
+
+    <ion-fab (click)="addNewAdgenda()" horizontal="end">
+      <ion-icon color="light" size="large" name="add-circle-outline"></ion-icon>
+    </ion-fab>
+
+  </ion-item>
+
+  <ion-item lines="none">
+    <i slot="start" class="fa fa-angle-left f-arrow-icon" aria-hidden="true"></i>
+    <div class="months-list">
+      <ion-text *ngFor="let o of monthsList let i = index" class="months-name" (click)="setActiveWeek(i)" color="none"
+        [ngClass]="activeWeek(i)">{{o.short}}</ion-text>
+    </div>
+    <i slot="end" class="fa fa-angle-right f-arrow-icon" aria-hidden="true"></i>
+  </ion-item>
+
+  <!--  <div>
+    <div class="days-list">
+        <ion-badge class="day-name" *ngFor = "let o of daysList let i = index" (click) = "setActiveWeek(i)" color = "none" [ngClass] = "activeWeek(i)">
+          <p color="none">{{o.short}}</p>
+          <span class="day-no" color="none">31</span>
+        </ion-badge>
+    </div>
+  </div> -->
+
+  <div class="list-body">
+    <ion-card class="bg-primary" *ngFor="let o of adgList" class="agend-item" (click)="viewAdgenda(o.id)">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="4">
+              <ion-text class="card-time">
+                {{o.start_time | date:'h:mm:ss a'}}
+              </ion-text>
+              <ion-text>
+                <p class="date">{{o.start_date | date:'d MMM y'}}</p>
+                <p class="card-time-ago">{{o.start_date | date:'h:mm'}}&nbsp;mins</p>
+              </ion-text>
+
+            </ion-col>
+            <ion-col>
+              <ion-text class="card-adg-name">
+                {{o.title | titlecase}}
+              </ion-text>
+              <p class="location">{{o.address}}</p>
+              <p class="details">{{o.notes}}.</p>
+
+              <!-- <ul class="invitees">
+                <li>
+                  <img src="assets/default-icon/user.jpg" />
+                </li>
+                <li>
+                  <img src="assets/default-icon/user.jpg" />
+                </li>
+                <li>
+                  <img src="assets/default-icon/user.jpg" />
+                </li>
+                <li>
+                  <img src="assets/default-icon/user.jpg" />
+                </li>
+                <li>
+                  <span>4+</span>
+                </li>
+              </ul> -->
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+</ion-content>

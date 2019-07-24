@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar class="home-h-bg">
+        <ion-buttons slot="start">
+            <ion-back-button color="light"></ion-back-button>
+        </ion-buttons>
+        <ion-title color="light">
+            Attendees
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="list">
+
+    <ion-list>
+        <ion-item>
+            <ion-label>Pokémon Yellow</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label>Mega Man X</ion-label>
+        </ion-item>
+    </ion-list>
+
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles">
+        </ion-refresher-content>
+    </ion-refresher>
+</ion-content>

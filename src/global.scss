@@ -1,0 +1,77 @@
+// http://ionicframework.com/docs/theming/
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+@import '~font-awesome/css/font-awesome.min.css';
+.bg-primary {
+    background: #AA076B;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #61045F, #AA076B);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #61045F, #AA076B);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 16px;
+    color: #ffffff;
+  }
+.tab-selected{
+  color: rgb(196, 18, 18);
+}
+  .sc-ion-card-ios-h{
+    background-color: white;
+  }
+  ion-content{
+    --background-color: #5f00b8!important;
+  }
+  .bg-toolbar{
+    --background: linear-gradient(to bottom, rgba(109,47,148,1) 0%, rgb(155, 34, 127) 54%, rgb(191, 3, 105) 93%, rgb(154, 154, 154) 100%);
+    --filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d2f94', endColorstr='#da0a5a', GradientType=0 );
+}
+
+.active-chip {
+  color: white;
+  background-color: #5f00b8;
+} 
+
+.head{
+  color: black;
+  font-weight: bolder;
+  &.head-xk{
+    font-size: 18px;
+  }
+  &.head-l{
+    font-size: 16px;
+  }
+  &.head-m{
+    font-size: 14px;
+  }
+  & .head-s{
+    font-size: 12px;
+  }
+}
+
+.price{
+  color: #ea71a0;
+  font-weight: bold;
+  &.price-s{
+    font-size: 12px;
+  }
+  &.price-m{
+    font-size: 14px;
+  }
+  &.price-l{
+    font-size: 16px;
+  }
+  &.price-xl{
+    font-size: 18px;
+  }
+}
+
+@import "~@mobiscroll/angular/dist/css/mobiscroll.scss";

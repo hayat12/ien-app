@@ -1,0 +1,14 @@
+.home-h-bg{
+  --background: var(--ion-toolbar-background,#6e2f94);
+}
+.image-list{
+  // display: flex;
+  // flex-wrap: wrap;
+  $width: 100%;
+  .image-card{
+    padding: 10px 10px;
+    border-radius: 0px;
+    margin: 0px 0px;
+    width: $width;
+  }
+}

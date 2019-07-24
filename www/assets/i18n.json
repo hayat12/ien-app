@@ -1,0 +1,20 @@
+{
+    "ien":{
+        "app-name": "IEN Global",
+        "home-screen":{},
+        "notification-screen":{},
+        "contact-screen":{},
+        "profile-screen":{
+            "title":"Profile",
+            "create-profile":{
+                "title":"User Profile"
+            }
+        },
+        "events":{
+            "title":"Events",
+            "create-event":{
+                "title": "Create Event"
+            }
+        }
+    }
+}

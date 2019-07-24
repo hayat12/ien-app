@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar class="bg-toolbar">
+    <ion-buttons slot="start">
+      <!-- <ion-menu-button></ion-menu-button> -->
+      <ion-back-button color = "light" defaultHref="new-adgenda"></ion-back-button>
+    </ion-buttons>
+    <ion-title color = "light">
+      Invites 
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="pp-content">
+  <ion-card class="invities-card">
+    <div class="selected-invites">
+      <span *ngFor="let entry of selectedConnList" class="flex-watater">
+        <ion-avatar>
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+      </span>
+    </div>
+  </ion-card>
+
+  <ion-list>
+    <ion-item *ngFor="let entry of invitesList" (click)="selectConnection(entry)">
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label>{{blankInfo(entry)}}</ion-label>
+      <ion-checkbox slot="end"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <!-- [(ngModel)]="entry.isChecked" -->
+  <ion-button (click) = "inviteNow()" expand="block" color="danger">Invite</ion-button>
+</ion-content>

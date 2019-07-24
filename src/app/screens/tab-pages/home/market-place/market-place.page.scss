@@ -1,0 +1,45 @@
+
+.home-h-bg{
+    --background: var(--ion-toolbar-background,#ff7e00);
+  }
+
+ion-content{
+
+    --background: linear-gradient(26deg, rgba(242,242,242,1) 0%, rgba(242,242,242,1) 55%, rgb(191, 48, 48) 50%, rgb(190, 75, 55) 57%, rgb(255, 121, 0) 77%);
+    --filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e2f94', endColorstr='#F2F2F2',GradientType=0 );
+}
+
+.sc-ion-card-ios-h{
+    margin: 0px;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 230px;
+    max-height: 230px;
+}
+.prd-price{
+    font-size: 16px;
+    color: #e632d4;
+    font-weight: bold;
+}
+.discount-price{
+    font-size: 12px;
+}
+.td-icon{
+    font-size: 24px;
+    font-weight: lighter;
+} 
+.card-title{
+    padding: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+    font-size: 16px;
+    font-weight: lighter;
+}
+.img{
+    max-width: 100%;
+    min-width: 100%;
+    border: 0;
+    max-height: 130px;
+    min-height: 130px;
+}

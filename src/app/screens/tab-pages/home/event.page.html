@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar class="home-h-bg">
+    <ion-buttons slot="start"> 
+      <ion-back-button color='light' defaultHref="tabs/(tab1:tab1)"></ion-back-button>
+    </ion-buttons>
+        <ion-title class="evn-name" color="light"> Events </ion-title>
+      <ion-buttons slot="end" (click) = "toAddNewEvent()">
+        <ion-button>
+            <ion-icon color = "light" name="add-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button>
+          <!-- <ion-icon color="light" name="logo-yahoo"></ion-icon> -->
+          <ion-icon color="light" name="funnel"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  <ion-toolbar class="home-h-bg">
+    <ion-searchbar (ionChange)="search($event)" color = "dark" color='light'></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <section *ngIf = "event_list">
+    <ion-card color="light" class="events-card" *ngFor = "let item of event_list">
+      <!--<img class="event-imge" [src]="blankImage(item.event_image)"> -->
+      
+      <ion-grid (click) = "toEventDetails(item)">
+          <ion-row size="12">
+            <ion-col size="4">
+              <img class="event-imge" [src]="blankImage(item.event_image)">
+            </ion-col>
+            <ion-col size="6">
+
+            <p class="event-name">{{item.event_name | titlecase}}</p>
+              <ion-text color = "medium">{{item.about_event}}</ion-text>
+
+            </ion-col>
+            <ion-col size="2">
+              <div style="text-align: center">
+                  <p class="event-day">{{item.start_date | date: 'd'}}</p>
+                  <span class="event-month">{{item.start_date | date: 'MMM'}}</span>
+              </div>
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <!--<ion-grid>
+      <ion-card-content>
+          <ion-row size="12">
+            <ion-col size="2">
+              <div style="text-align: center">
+                  <p class="event-day">{{item.start_date | date: 'd'}}</p>
+                  <span class="event-month">{{item.start_date | date: 'MMM'}}</span>
+              </div>
+            </ion-col>
+            <ion-col>
+              <p class="event-name">{{item.event_name | titlecase}}</p>
+              <ion-text color = "medium">{{item.about_event}}</ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid> -->
+<ion-item>
+      <!-- <ion-button size="small" color="danger" shape="round" slot="start" color="tertiary"></ion-button> -->
+      <ion-label (click) = "toAttend(item.id)" size="small" color="dark" fill="outline" slot="start">
+        <span class="attend-no">45</span>
+        &nbsp;Attending</ion-label>
+      <ion-button (click) = "toEdit(item.id)" size="small" slot="end" color="tertiary">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+      <ion-button (click) = "presentAlertConfirm(item.id, {action: 'delete'})" size="small" slot="end" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+</ion-item>
+        <!-- comment %} <ion-grid>
+          <ion-row size="12">
+            <ion-col size="8">Attending </ion-col>
+            <ion-col size="2">
+              <ion-icon name="create"></ion-icon>
+            </ion-col>
+            <ion-col size="2">
+              <ion-icon name="trash"></ion-icon>
+            </ion-col>
+          </ion-row>
+      </ion-card-content>
+        </ion-grid> -->
+
+    </ion-card>
+  </section>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+</ion-content>

@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar class="home-h-bg">
+    <ion-buttons slot="start">
+      <ion-back-button color='light' defaultHref="tabs/(tab1:tab1)"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light"> Events </ion-title>
+  </ion-toolbar>
+  <ion-toolbar class="home-h-bg">
+    <ion-searchbar (ionChange)="search($event)" color="dark" color='light'></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <section *ngIf="event_list">
+        <ion-card color="light" *ngFor="let o of event_list" (click)="viewEvent(o)">
+          <img class="img" [src]="blankImage(o.event_image)">
+          <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                  <ion-col size = "3">
+                    <p class="event-day">
+                        {{o.start_date | date: 'd'}}
+                    </p>
+                    <p class="event-month">
+                        {{o.start_date | date: 'MMM'}}
+                    </p>
+                  </ion-col>
+                  <ion-col size = "9">
+                    <div class="evn-name">
+                        {{o.event_name | titlecase}}
+                    </div>
+                    <div class="event-desc">
+                        {{o.about_event}}
+                    </div>
+                  </ion-col>
+                </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+  </section>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+</ion-content>

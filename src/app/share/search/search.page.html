@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar class="bg-toolbar">
+      <ion-buttons slot="start">
+        <ion-back-button color = "light"></ion-back-button>
+      </ion-buttons>
+    <ion-searchbar (keyup)="search($event.target.value)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor = "let item of items" (click)="viewEvent(item.id)">
+      <ion-avatar slot="start">
+        <img [src]="eventBlankPage(item.event_image)">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{item.event_name}}</h2>
+        <h3>{{item.about_event}}</h3>
+        <p>{{item.created_date | date:'short'}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content> 

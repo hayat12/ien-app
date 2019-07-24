@@ -1,0 +1,39 @@
+.home-h-bg{
+  --background: var(--ion-toolbar-background,#6e2f94);
+}
+ion-content{
+  --background: -moz-linear-gradient(64deg, rgba(242,242,242,1) 0%, rgba(242,242,242,1) 49%, rgba(163,41,118,1) 50%, rgba(149,42,125,1) 57%, rgba(110,47,148,1) 77%); /* ff3.6+ */
+  --background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(242,242,242,1)), color-stop(49%, rgba(242,242,242,1)), color-stop(50%, rgba(163,41,118,1)), color-stop(57%, rgba(149,42,125,1)), color-stop(77%, rgba(110,47,148,1))); /* safari4+,chrome */
+  --background: -webkit-linear-gradient(64deg, rgba(242,242,242,1) 0%, rgba(242,242,242,1) 49%, rgba(163,41,118,1) 50%, rgba(149,42,125,1) 57%, rgba(110,47,148,1) 77%); /* safari5.1+,chrome10+ */
+  --background: -o-linear-gradient(64deg, rgba(242,242,242,1) 0%, rgba(242,242,242,1) 49%, rgba(163,41,118,1) 50%, rgba(149,42,125,1) 57%, rgba(110,47,148,1) 77%); /* opera 11.10+ */
+  --background: -ms-linear-gradient(64deg, rgba(242,242,242,1) 0%, rgba(242,242,242,1) 49%, rgba(163,41,118,1) 50%, rgba(149,42,125,1) 57%, rgba(110,47,148,1) 77%); /* ie10+ */
+  --background: linear-gradient(26deg, rgba(242,242,242,1) 0%, rgba(242,242,242,1) 55%, rgba(163,41,118,1) 50%, rgba(149,42,125,1) 57%, rgba(110,47,148,1) 77%); /* w3c */
+  --filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e2f94', endColorstr='#F2F2F2',GradientType=0 ); /* ie6-9 */
+}
+
+.event-details{
+  margin-top: -50px;
+  background-color: white;
+}
+.event-img{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.card-title{
+  font-size: 16px; 
+  font-weight: bold;
+}
+
+.edit-icon{
+  position: absolute;
+  font-size: 23px;
+  color: rgb(205, 18, 111);
+  cursor: pointer;
+  margin-left: 320px;
+  margin-top: 14px;
+}
+
+.edit-icon:hover{
+  color: rgb(223, 106, 164);
+}

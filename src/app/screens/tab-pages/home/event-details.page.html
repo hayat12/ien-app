@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar class="home-h-bg">
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">
+      Event
+    </ion-title>
+    <!-- <ion-buttons slot="end" *ngIf = "isEditable">
+      <ion-icon size="large" (click)="presentPopover($event)" color="light" name="more"></ion-icon>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="event">
+  <img class="event-img" [src]="blankImage(event.event_image, event.id)">
+  <section>
+    <ion-card color="light" class="event-details">
+      <ion-card-content>
+        <ion-text color="dark">
+          <span class="card-title">{{event.event_name |titlecase}}</span>
+        </ion-text><br>
+        <ion-text color="medium">
+          {{event.about_event}}
+        </ion-text>
+
+        <br><br><ion-list>
+          <span>
+            <ion-icon color="dark" size="small" name="pin"></ion-icon>&nbsp;
+            <ion-label color="dark">{{event.location}}</ion-label> <br>
+            <ion-text color="medium">
+              {{event.selected_address}}
+            </ion-text><br>
+          </span> <br>
+          <span>
+            <ion-icon size="small" color="dark" name="time"></ion-icon>&nbsp;&nbsp;
+            <ion-label color="dark">{{event.start_date |date : 'EEEE d MMM y'}}
+              <small>&nbsp;{{event.start_time}}</small>
+            </ion-label>
+          </span>
+        </ion-list><br>
+        <div>
+          <span class="card-title">About</span><br>
+          <ion-text color="medium">
+            {{event.about_event}}
+          </ion-text>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </section>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+</ion-content>
+<ion-button color="tertiary" (click)="getTicket()" expand="full">Get Ticket</ion-button>

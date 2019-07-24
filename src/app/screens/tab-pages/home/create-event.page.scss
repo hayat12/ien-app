@@ -1,0 +1,17 @@
+.event-header{
+  padding-right: 5%;
+  padding-left: 5%;
+}
+.cus-card{
+  text-align: center;
+}
+.event-img{
+  margin: auto;
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+}
+:host .event-upload-img {
+  width: 6em!important;
+  height: 6em!important;
+}

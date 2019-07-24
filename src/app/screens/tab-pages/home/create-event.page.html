@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar class="bg-toolbar">
+    <ion-buttons color="light" slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">
+      New Event
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="myGroup" #frm="ngForm">
+    <ion-item>
+      <ion-input formControlName="event_name" required type="text" placeholder="Event Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select formControlName="category" value="edu" ok-text="Okay" cancel-text="Dismiss">
+        <ion-select-option name="catgory" value="edu">Education</ion-select-option>
+        <ion-select-option name="catgory" value="bus">Business</ion-select-option>
+        <ion-select-option name="catgory" value="mak">Maketing</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- <ion-item>
+      <ion-label>Quantity</ion-label>
+      <ion-input formControlName="qty" type = "number" min = "0" placeholder="Quantity"></ion-input>
+    </ion-item> -->
+
+    <ion-item>
+      <ion-label>Start Date</ion-label>
+      <ion-datetime formControlName="start_date" placeholder="Start Date" display-format="MMM DD, YYYY"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Start Time </ion-label>
+      <ion-datetime formControlName="start_time" placeholder="Start Time" display-format="HH:mm A"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>End Date </ion-label>
+      <ion-datetime formControlName="end_date" placeholder="End Date" display-format="MMM DD, YYYY"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>End Time </ion-label>
+      <ion-datetime formControlName="end_time" placeholder="End Date" display-format="HH:mm A"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-input formControlName="location" required type="text" placeholder="Venue Name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input (keyup)="searchAddress($event)" formControlName="selected_address" required type="text"
+        placeholder="Select Location"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-textarea formControlName="about_event" required type="text" placeholder="About Event"></ion-textarea>
+    </ion-item>
+
+    <ion-button *ngIf="!isEditMode" (click)="createEvent(frm.value)" [disabled]="frm.invalid" type="submit"
+      expand="full" color="tertiary">CREATE EVENT</ion-button>
+    <ion-button *ngIf="isEditMode" (click)="updateEvent(frm.value)" [disabled]="frm.invalid" type="submit" expand="full"
+      color="tertiary">UPDATE EVENT</ion-button>
+
+    <ion-card (click)='chooseImage()' class="cus-card">
+      <ion-icon color="primary" name="images" class="event-upload-img"></ion-icon>
+      <ion-card-content>Upload Image</ion-card-content>
+    </ion-card>
+
+  </form>
+</ion-content>

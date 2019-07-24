@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar class="bg-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="profile"></ion-back-button>
+    </ion-buttons>
+    <ion-searchbar (ionChange)="search($event)"></ion-searchbar>
+
+    <ion-buttons (click) = "createAgenda()" slot="end" class="add-agenda">
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-buttons>
+
+    <!-- <ion-button  size="small" color="light">
+        <ion-icon name="add-circle"></ion-icon>
+    </ion-button> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card class="bg-primary" *ngFor="let o of adgList" class="agend-item">
+    <ion-card-content>
+      <ion-grid (click)="viewAgenda(o.id)">
+        <ion-row>
+          <ion-col size="4">
+            <ion-text class="card-time">
+              {{o.start_time | date:'h:mm:ss a'}}
+            </ion-text>
+            <ion-text>
+              <p class="date">{{o.start_date | date:'d MMM y'}}</p>
+              <p class="card-time-ago">{{o.start_date | date:'h:mm'}}&nbsp;mins</p>
+            </ion-text>
+
+          </ion-col>
+          <ion-col>
+            <ion-text class="card-adg-name">
+              {{o.title | titlecase}}
+            </ion-text>
+            <p class="location">{{o.address}}</p>
+            <p class="details">{{o.notes}}.</p>
+
+            <!-- <ul class="invitees">
+              <li>
+                <img src="assets/default-icon/user.jpg" />
+              </li>
+              <li>
+                <img src="assets/default-icon/user.jpg" />
+              </li>
+              <li>
+                <img src="assets/default-icon/user.jpg" />
+              </li>
+              <li>
+                <img src="assets/default-icon/user.jpg" />
+              </li>
+              <li>
+                <span>4+</span>
+              </li>
+            </ul> -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <ion-button (click)="editAgenda(o.id)" size="small" color="tertiary">
+              <ion-icon name="create"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button (click)="presentAlertConfirm(o.id, {action: 'delete'})" size="small" color="danger">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+</ion-content>

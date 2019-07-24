@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar class="home-h-bg">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">
+      New Item
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="fGroup" #frm="ngForm">
+    <ion-item>
+      <ion-input required formControlName="item_name" placeholder="Item Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" min = "0" required formControlName="price" placeholder="Price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input required min="1" type="number" formControlName="qty" placeholder="Quantity"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-textarea required rows='6' formControlName="desc" placeholder="Descriptions "></ion-textarea>
+    </ion-item>
+
+    <div class="image-list">
+      <ion-card class="image-card upload-image" (click)="chooseImage()">
+        <img src="assets/bg/bg.jpg">
+      </ion-card>
+    </div>
+
+    <ion-button *ngIf="!isEditMode" [disabled]="frm.invalid" (click)="saveMarketPlace(frm.value)" expand="full" color="danger">Add to Market
+      Place </ion-button>
+    <ion-button *ngIf="isEditMode" [disabled]="frm.invalid" (click)="updateMarketPlace(frm.value)" expand="full" color="danger">Update
+    </ion-button>
+  </form>
+</ion-content>

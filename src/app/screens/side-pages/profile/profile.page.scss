@@ -1,0 +1,103 @@
+h1 {
+  margin: 0;
+  font-weight: 300;
+}
+
+.profile {
+  text-align: center;
+
+  img {
+      display: block;
+      margin: 0 auto;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+  }
+
+  h2 {
+      margin-bottom: 0px;
+      font-weight: 100;
+  }
+
+  h5 {
+      margin-top: 0px;
+  }
+}
+
+.point-summary {
+  padding: 0px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+}
+
+.points {
+  border-top: 1px solid #b36398;
+  border-right: 1px solid #b36398;
+  padding: 16px;
+
+  h4 {
+      margin: 0px;
+      text-transform: uppercase;
+      font-size: 16px;
+      font-weight: 400;
+      ;
+  }
+
+  p {
+      margin-top: 0px;
+      font-size: 0.81rem;
+      font-weight: 300;
+
+      span {}
+  }
+
+  .total {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 0px;
+  }
+}
+
+.manage-option {
+
+  text-align: center;
+  text-transform: uppercase;
+
+
+  .icon {
+      padding: 0px;
+
+      ion-icon {
+          font-size: 3rem;
+      }
+
+      ion-badge {
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          text-align: center;
+      }
+  }
+
+  ion-text {
+      font-weight: 600;
+  }
+
+  ion-col {
+      padding: 0;
+  }
+}
+
+.tabs-card{
+    text-align: center;
+    margin: 0px;
+    height: 120px;
+    & ion-icon{
+      zoom: 2;
+    }
+    & .card-content-ios{
+      padding: 10px;
+    }
+  }
+// .point:first-child {}

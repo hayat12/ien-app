@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar class="bg-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="tabs"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <ul class="progressbar">
+      <li [class]="active(stp1)">
+        <span class="step-name">Information</span>
+      </li>
+      <li [class]="active(stp2)">
+        <span class="step-name">Qualification</span>
+      </li>
+      <li [class]="active(stp3)">
+        <span class="step-name">Interest</span>
+      </li>
+    </ul>
+  </div>
+  <br>
+  <br>
+  <form [formGroup]="fGroup" #frm="ngForm">
+    <section *ngIf = "isSubmittedStep1" id="section-1" padding>
+      <ion-card-content class="pp-img-card">
+        <div (click)="chooseImage()">
+          <img class="user-pp" [src]="blankImage(imgUrl)">
+        </div>
+      </ion-card-content>
+      <!-- <input type="file" (change)="uploadImage($event.target.files)" accept="image/*" multiple="false" type="file"> -->
+      <br>
+      <p> <strong>Persinal</strong> </p>
+      <ion-item>
+        <ion-input formControlName="first_name" placeholder="First Name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="last_name" placeholder="Last Name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Designation</ion-label>
+        <ion-select value="" placeholder="Select One" formControlName="designation">
+          <ion-select-option value="1">IT Manager</ion-select-option>
+          <ion-select-option value="2">HR</ion-select-option>
+          <ion-select-option value="3">Doctor</ion-select-option>
+          <ion-select-option value="4">Actor</ion-select-option>
+          <ion-select-option value="5">Chief Operating Officer</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-input formControlName="dob" placeholder="Date of Birth" type="date"></ion-input>
+      </ion-item> -->
+
+      <ion-item>
+        <ion-textarea formControlName="about_me" placeholder="About Me"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="phone" placeholder="Phone No"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="address" placeholder="Address"></ion-input>
+      </ion-item>
+
+      <p>Current Working for </p>
+      <ion-item>
+        <ion-input formControlName="company_name" placeholder="Organization"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="position_held" placeholder="Position held"></ion-input>
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-input formControlName="passport" placeholder="Name as in IC/Passport"></ion-input>
+      </ion-item> -->
+      <!-- <ion-item>
+        <ion-input formControlName="account_no" placeholder="Account No"></ion-input>
+      </ion-item> -->
+      <!-- <ion-item>
+        <ion-input formControlName="bank_name" placeholder="Bank Name"></ion-input>
+      </ion-item> -->
+      <ion-button (click) = "submitStep1()" type="submit" expand="full" color="tertiary">Next</ion-button>
+    </section>
+
+    <section *ngIf = "isSubmittedStep2" padding class="section-3">
+      <ion-label>
+        Main Interest
+      </ion-label>
+      <ion-item>
+        <ion-label>Designation</ion-label>
+        <ion-select placeholder="Select One" formControlName="main_interest">
+         <!-- <ion-select-option *ngFor = "let o of destinationList" [value]="o.id">{{o.name}}</ion-select-option> -->
+          <ion-select-option value="1">Computer Graphics</ion-select-option>
+          <ion-select-option value="2">Hardware</ion-select-option>
+          <ion-select-option value="3">Software</ion-select-option>
+          <ion-select-option value="4">Artificial Intelligence</ion-select-option>
+          <ion-select-option value="5">Machine Learning</ion-select-option>
+          <ion-select-option value="6">Software Engineering</ion-select-option>
+          <ion-select-option value="7">Cloud</ion-select-option>
+          <ion-select-option value="8">Multimedia</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <br>
+      <ion-label>
+        SubInterest
+      </ion-label>
+
+      <div class="chipList">
+        <ion-chip (click) = "subInterestChip(o)" *ngFor = "let o of chipList let i = index" [ngClass]="{'active-chip':activeChip(o)}">
+          <ion-label>{{o.name}}</ion-label>
+        </ion-chip>
+      </div>
+      <ion-button (click) = "submitStep2()" type="submit" expand="full" color="tertiary">Next</ion-button>
+    </section>
+
+    <section *ngIf = "isSubmittedStep3" padding class="section-3">
+      <ion-card>
+        <ion-card-content>
+          Finish to complete your profile
+        </ion-card-content>
+      </ion-card>
+      <ion-button (click) = "saveProfile(frm.value)" type="submit" expand="full" color="tertiary">Finished</ion-button>
+    </section>
+  </form>
+</ion-content>

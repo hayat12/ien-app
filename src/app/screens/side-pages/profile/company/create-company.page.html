@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="profile"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="fgroup" (ngSubmit)="saveCompany(frm.value)" #frm="ngForm">
+    <section id="section-1" padding>
+      <ion-card-content class="pp-img-card">
+        <img src="http://files.all-free-download.com//downloadfiles/wallpapers/1280_1024/kristen_stewart_twilight_girl_3844.jpg">
+      </ion-card-content>
+      <br>
+      <p> 
+        Information
+      </p>
+      <ion-item>
+        <ion-input formControlName="companyName" placeholder="Company Name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Registration Number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Select Industry</ion-label>
+        <ion-select value="f" placeholder="Select One" formControlName="industry">
+          <ion-select-option value="f">option 1</ion-select-option>
+          <ion-select-option value="m">option 2</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="officePhoneNo" placeholder="Office Telephone Numbe"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="officeEmail" placeholder="Email Address"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="address" placeholder="Address"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="website" placeholder="Website"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea formControlName="aboutCompany" placeholder="About The Company"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="yearFound" placeholder="Year Founded"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="companySize" placeholder="Company Size"></ion-input>
+      </ion-item>
+
+      <p>Company Bank Details</p>
+
+      <ion-item>
+        <ion-input formControlName="mameAsPass" placeholder="Name as in IC/Passport"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="accountNo" placeholder="Account No"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="bankName" placeholder="Bank Name"></ion-input>
+      </ion-item>
+    </section>
+
+    <section padding>
+      <p>Main Interest</p>
+      <ion-item>
+        <ion-label>Computer</ion-label>
+        <ion-select value='f' placeholder="Select One" formControlName="mainInterest">
+          <ion-select-option value="f">Computer </ion-select-option>
+          <ion-select-option value="m">Browsing </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <p>Sub-Interest</p>
+
+      <!-- <div class="subInterest" *ngFor="let item of subInterest let i = index">
+        <ion-chip class="active" (click)="isActive(i)">
+          <ion-label>{{item.value}}</ion-label>
+        </ion-chip>
+      </div> -->
+        
+<!-- <ion-checkbox color="primary" checked></ion-checkbox>
+<ion-checkbox color="secondary"></ion-checkbox>
+<ion-checkbox color="danger" checked></ion-checkbox>
+<ion-checkbox color="light"></ion-checkbox>
+<ion-checkbox color="dark" checked></ion-checkbox> -->
+
+        <!-- <ion-chip  style="margin-top: 5px;" *ngFor="let x of subInterest; let i = index" [class]="active: x.key === selected[i]" (click)="statusOption = x.key"> {{x.value}} {{selected[i]}} </ion-chip> -->
+         <!-- [ngClass]="{'mat-chip-selected': x.key === statusOption}" -->
+         <!-- [selected]="i === statusOption" -->
+
+    </section>
+
+    <ion-button type="submit" expand="full" color="tertiary">Finished</ion-button>
+  </form>
+
+</ion-content> 

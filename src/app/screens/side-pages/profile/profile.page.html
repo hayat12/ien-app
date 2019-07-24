@@ -1,0 +1,119 @@
+<ion-header class="bg-primary" color="light">
+  <ion-back-button defaultHref="tabs/(tab1:tab1)"></ion-back-button>
+  <ion-title>
+      Manage IEN Global
+    </ion-title>
+  <!-- <ion-toolbar>
+    <ion-buttons slot="start">
+    </ion-buttons>
+ 
+  </ion-toolbar> -->
+</ion-header>
+
+<ion-content color="light">
+  <ion-grid class="bg-primary">
+    <ion-row>
+      <ion-col class="profile">
+        <img style="border:2px solid lightgray; padding: 2px; object-fit: contain" [src]="blankImage(userImage)" alt="">
+        <h2>{{myInfo}}</h2>
+        <!-- <h5>Founder / CEO</h5> -->
+        <ion-button (click)="createProfile()" size="small" color="light" fill="outline" shape="round">Preview</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="bg-primary point-summary">
+    <ion-row>
+      <ion-col size="6" class="points">
+        <h4>Trading Pts:</h4>
+        <p>Widthdrawable: <span>_pts_</span></p>
+        <p class="total">__pts__</p>
+      </ion-col>
+      <ion-col size="6" class="points">
+        <h4>Commitment Pts:</h4>
+        <p>Widthdrawable: <span> _pts_</span></p>
+        <p class="total">__pts__</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor = "let ob of moduleNameTabs; let i = index" size="6">
+        <ion-card class="manage-option" class="tabs-card" (click)="manageEvent(ob.id, i)">
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col class="icon">
+                  <ion-icon [name]="ob.icon" color="tertiary"></ion-icon>
+                  <!-- <ion-badge *ngIf = "records.length > 0 && ob.id ==1" color="danger">{{records[0].count_event}}</ion-badge>
+                  <ion-badge *ngIf = "records.length > 0 && ob.id ==2" color="danger">{{records[0].count_agenda}}</ion-badge>
+                  <ion-badge *ngIf = "records.length > 0 && ob.id ==3" color="danger">{{records[0].count_market_place}}</ion-badge> -->
+                </ion-col>
+                <ion-col size="12">
+                  <ion-text color="tertiary">{{ob.name}}</ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+
+      <!-- <ion-col size="6">
+        <ion-card class="manage-option" (click)="manageAgenda()">
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col class="icon">
+                  <ion-icon name="calendar" color="tertiary"></ion-icon>
+                  <ion-badge color="danger">3</ion-badge>
+                </ion-col>
+                <ion-col size="12">
+                  <ion-text color="tertiary">Manage Agenda</ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+          <ion-card class="manage-option" (click)="manageMarketPlaces()">
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-col class="icon">
+                    <ion-icon name="calendar" color="tertiary"></ion-icon>
+                    <ion-badge color="danger">3</ion-badge>
+                  </ion-col>
+                  <ion-col size="12">
+                    <ion-text color="tertiary">Manage Market Place</ion-text>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ion-col> -->
+
+      <!-- <ion-col size="6">
+        <ion-card class="manage-option">
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col class="icon">
+                  <ion-icon name="cube" color="tertiary"></ion-icon>
+                  <ion-badge color="danger">3</ion-badge>
+                </ion-col>
+                <ion-col size="12">
+                  <ion-text color="tertiary">Manage Items</ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col> -->
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar class="home-h-bg">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-searchbar color="light" class="search-input" (click)="goSearch()"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button>
+        <i class="fa fa-id-card f-icon" aria-hidden="true"></i>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+<ion-content [scrollEvents]="true">
+  <div class="lb-welcome">
+    <ion-icon ios="ios-partly-sunny" style="zoom:1.7;" md="md-partly-sunny"></ion-icon>
+    <span>&nbsp;&nbsp;Good {{setWelcomeTime()}}</span>
+  </div>
+
+  <section *ngIf = "event_list.length>0" class="custom-event-section">
+    <ion-label (click)="viewEvents()" horizontal="start" class="up-coming-event-t">UPCOMING EVENTS
+      <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+    </ion-label>
+    <div class="card-list">
+      <ion-card color="light" *ngFor="let o of event_list" class="even-custom-card" (click)="viewEvent(o.id)">
+        <div class="date-card">
+          <p>{{o.start_date | date: 'dd'}}</p>
+          <strong>{{o.start_date | date: 'MMM'}}</strong>
+        </div>
+        <!--<img class="event-card-img"
+          [src]="eventBlankPage(o.event_image)"> -->
+          
+          <img class="event-card-img"
+          [src]="blankPage(o.event_image)">
+        <ion-card-content>
+          <div class="event-name">{{o.event_name | titlecase}}</div>
+          <div class="card-text">
+            {{o.location}}
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </section>
+ 
+  <section *ngIf = "market_place_list.length>0" class="custom-market-place-section">
+    <ion-label (click)="viewAllMarketPlaces()" horizontal="start" class="up-coming-mkt-t">
+      MARKET PLACE
+      <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+    </ion-label>
+    <div class="card-list">
+      <ion-card color="light" class="mkt-custom-card" *ngFor="let o of market_place_list"
+        (click)="editMarketPlace(o.id)">
+        <img class="event-card-img" [src]="blankPage(o.picture)">
+        <ion-card-content>
+          <div class="event-name">{{o.item_name | titlecase}}</div>
+          <div class="card-text">
+            <span class="price">RM&nbsp;{{o.price}}</span>&nbsp;&nbsp;<span class="discount-price">
+          </span>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </section>
+
+
+  <!-- <section id="section" class="custom-new-section">
+    <ion-label class="up-coming-mkt-t" horizontal="start">
+      NEWS
+      <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+    </ion-label>
+    <ion-card color="light">
+      <ion-card-content>
+        <h1>Coming soon</h1>
+      </ion-card-content>
+    </ion-card>
+  </section> -->
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content slot="fixed" pullingIcon="arrow-dropdown" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+</ion-content>

@@ -1,0 +1,107 @@
+.home-h-bg{
+    --background: var(--ion-toolbar-background,#db0857);
+  }
+  ion-item{
+    --background: var(--ion-content);
+  }
+.add-agenda{
+  margin-right: 10px;
+  & > ion-icon{
+    zoom: 1.5;
+    color: white;
+  }
+}
+  .sc-ion-card-ios-h{
+      margin: 10px 10px;
+  }
+  .ca-name{
+    font-size: 30px;
+    font-weight: lighter;
+    color: white;
+  }
+
+  .list-body{
+    max-height: 82%;
+    min-width: 100%;
+    overflow: auto;
+    margin-top: 0px;
+    position: fixed;
+  }
+  .card-time{
+    color: gray;
+    font-size: 18px;
+  }
+  .card-time-ago{
+    text-align: center;
+    background-color: blueviolet;
+    width: 65px;
+    padding: 4px;
+    color: white;
+    border-radius: 2px;
+    font-size: 10px;
+    margin-top: 5px;
+  }
+  .card-date{
+    padding: 2px 8px;
+    font-weight: bold;
+    color: white;
+    border-radius: 2px;
+  }
+  .card-adg-name{
+    font-size: 22px;
+    color: #da0a5b;
+  }
+  .f-icon{
+    color: white;
+    font-size: 24px;
+  }
+  .f-arrow-icon{
+    color: white;
+    font-size: 32px;
+  }
+    ion-content {
+      background: #f7f7f7;
+    }
+     
+    .agend-item {
+      background: #ffffff;
+      color: #121212;
+    
+      ion-card-content {
+        padding: 6px;
+      }
+    
+      .date, .location {
+        font-weight: 600;
+    
+      }
+      .details {
+        margin-bottom: 8px;
+        line-height: 1.15;
+      }
+    
+      .invitees {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    
+        li {
+          display: inline-block;
+          vertical-align: middle;
+    
+          img {
+            object-fit: cover;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 5px;
+          }
+        }
+    
+        li:last-child {
+          text-align: center;
+          font-weight: 600;
+          width: 40px;
+        }
+      }
+    }

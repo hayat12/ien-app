@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar class="bg-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="tabs/(tab2:tab2)"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">New Adgenda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="fGroup" #frm="ngForm">
+    <ion-item>
+      <!-- <ion-label>Default Label</ion-label> -->
+      <ion-input formControlName="title" placeholder="Title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <!-- <ion-label>Default Label</ion-label> -->
+      <ion-textarea rows='6' formControlName="notes" placeholder="Notes"></ion-textarea>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>
+         <!-- <ion-icon slot = "start" size="large" name="time"></ion-icon> -->
+          <ion-icon size="large" ios="ios-navigate" md="md-navigate"></ion-icon>
+      </ion-label>
+      <ion-input formControlName="address" placeholder="Address"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-icon slot = "start" size="large" name="calendar"></ion-icon>
+      </ion-label>
+      <ion-datetime formControlName="start_date" placeholder="Date" display-format="MMM DD, YYYY"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-icon slot = "start" size="large" name="time"></ion-icon>
+      </ion-label>
+      <ion-datetime formControlName="start_time" placeholder="Time" display-format="HH:mm A"></ion-datetime>
+    </ion-item>
+    <br>
+    <ion-card *ngIf = "!isEditMode" class="invities-card">
+      <div class="selected-invites">
+        <span *ngFor="let entry of invitePPList" class="flex-watater">
+          <ion-avatar>
+            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          </ion-avatar>
+        </span>
+      </div>
+    </ion-card>
+    <ion-button shape="round" *ngIf = "!isEditMode" (click)="invitePP()" expand="full" color="primary">Invite</ion-button>
+
+    <ion-button shape="round" [disabled] = "frm.invalid" *ngIf = "!isEditMode" (click)="saveAdgenda(frm.value)" expand="full" color="danger">Finished</ion-button>
+    <ion-button shape="round" [disabled] = "frm.invalid" *ngIf = "isEditMode" (click)="updateAdgenda(frm.value)" expand="full" color="danger">Update</ion-button>
+  </form>
+</ion-content>

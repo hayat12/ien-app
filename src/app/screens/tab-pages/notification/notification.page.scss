@@ -1,0 +1,17 @@
+.home-silder{
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    border: 1px solid lightgray;
+    max-height: 50%;
+    min-height: 50%;
+}
+.home-silder>*{
+    max-height: 90%;
+    min-height: 90%;
+}
+
+.swiper-slide > img{
+    max-height: 100%;
+    min-height: 100%;
+}

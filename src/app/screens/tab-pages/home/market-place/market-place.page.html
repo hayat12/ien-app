@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar class="home-h-bg">
+    <ion-buttons slot="start">
+      <ion-back-button color = "light" defaultHref="tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-searchbar color = "light" (ionChange) = "search($event)"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon color = "light" name="card"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col padding size="10">
+      <ion-text class="td-icon" color = "light">Marketplace</ion-text>
+    </ion-col>
+    <ion-col padding size="1">
+      <ion-text  (click) = "addMarketPlace()" class="td-icon" color="tertiary">
+        <ion-icon color = "light" name="add-circle"></ion-icon>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col *ngFor = "let o of marketPlacesList" size="6" (click)="editMarketPlace(o)">
+      <ion-card color = "light">
+        <img class="img" [src]="blankImage(o.picture)">
+        <ion-card-content>
+            <div color = 'dark' class="card-title">{{o.item_name | titlecase}}</div> 
+            <p class="prd-price">RM {{o.price}}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+</ion-content>

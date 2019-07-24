@@ -1,0 +1,63 @@
+<ion-app class="slider-con">
+  <ion-split-pane>
+    <ion-menu>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Profile</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content *ngIf="myInfo">
+        <div class="profile-pic">
+          <ion-card-content>
+            <img class="p-pic" [src]="imgUrl" />
+          </ion-card-content>
+          <div class="user-info">
+            {{myInfo | titlecase}}
+          </div>
+        </div>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-item (click) = "logOut()">
+            <ion-icon slot="start" name="log-out"></ion-icon>
+            <ion-label>
+              Sign Out
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+
+  <!-- <ion-router-outlet></ion-router-outlet> -->
+</ion-app>
+
+<style>
+  .profile-pic {
+    max-width: 40%;
+    min-width: 80px;
+    margin: auto;
+    text-align: center;
+  }
+
+  .user-info {
+    text-align: justify center;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .p-pic {
+    max-width: 100%;
+    min-width: 100%;
+    border-radius: 50%;
+  }
+</style>
