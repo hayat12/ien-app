@@ -85,6 +85,7 @@ export class LoginPage implements OnInit {
         this.presentToast(message);
       })
       .catch(err => {
+        console.log(err);
         this.onError(err);
       });
   }

@@ -45,7 +45,6 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.getUserDetails();
-    // this.countRecords();
   }
 
   getUserDetails() {
@@ -55,6 +54,7 @@ export class ProfilePage implements OnInit {
           this.userDetails = res;
           this.userInfo(res);
           this.getUserPic(res.id);
+          this.countRecords(res.id);
           this.spinnerDialog.hide();
         },
         (err) => {
@@ -112,8 +112,8 @@ export class ProfilePage implements OnInit {
   }
     return lb;
   }
-  countRecords(){
-    this.appService.get_records().subscribe((res: any) => {
+  countRecords(id){
+    this.appService.get_records(id).subscribe((res: any) => {
       this.records = res;
     });
   }

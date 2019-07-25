@@ -279,7 +279,7 @@ export class AppService {
     post_connection(usersInvites) {
         return this.http.post(`${this.baseUrl}/api/invite-connections`, usersInvites);
     }
-    get_records() {
+    get_records(id) {
        return this.http.get(`${this.baseUrl}/api/count-records`);
     }
 }

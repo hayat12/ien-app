@@ -126,7 +126,7 @@ export class CreateEventPage implements OnInit {
         if (this.imagePath != null) {
           this.uploadFile(res.id);
         } else {
-          this.navCtrl.navigateBack('events');
+          this.navCtrl.navigateBack('events', 'mg');
         }
       }, (err) => {
         console.log(err);
