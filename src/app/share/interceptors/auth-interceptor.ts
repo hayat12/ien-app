@@ -11,13 +11,15 @@ import { map, catchError } from 'rxjs/operators';
 import {
   Router
 } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, NavController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private router: Router,
+  constructor(
+    private navCtrl: NavController,
+    private router: Router,
     public toastController: ToastController) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -26,15 +28,16 @@ export class AuthInterceptor implements HttpInterceptor {
     if (!_.isEmpty(token)) {
       request = request.clone({
         setHeaders: {
-          'Authorization': `Token ${token}`
+          'Authorization': `Bearer ${token}`
         }
       });
+      // 'client_id': 'zB7J49B2oFiZB7Ok2ccu2gClwSCFzy7ZCJ8k6P0R',
     }
 
     if (!request.headers.has('Content-Type')) {
       request = request.clone({
         setHeaders: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
         }
       });
     }
@@ -51,11 +54,13 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           if (error.error.success === false) {
-            console.log('Login failed');
             this.presentToast('Login failed');
           } else {
-            this.router.navigate(['login']);
+            this.navCtrl.navigateRoot('slider');
           }
+        } else if (error.status === 401) {
+          localStorage.removeItem('ien_token');
+          this.navCtrl.navigateRoot('slider');
         }
         return throwError(error);
       }));

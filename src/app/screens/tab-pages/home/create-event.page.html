@@ -11,7 +11,7 @@
 
 
 <ion-content padding>
-  <form [formGroup]="myGroup" #frm="ngForm">
+  <form [formGroup]="myGroup" #frm="ngForm" enctype="multipart/form-data">
     <ion-item>
       <ion-input formControlName="event_name" required type="text" placeholder="Event Name"></ion-input>
     </ion-item>
@@ -61,7 +61,7 @@
     <ion-item>
       <ion-textarea formControlName="about_event" required type="text" placeholder="About Event"></ion-textarea>
     </ion-item>
-
+    <!-- <input type="file" formControlName="img" (change) = "uploadImage($event.target.files)"> -->
     <ion-button *ngIf="!isEditMode" (click)="createEvent(frm.value)" [disabled]="frm.invalid" type="submit"
       expand="full" color="tertiary">CREATE EVENT</ion-button>
     <ion-button *ngIf="isEditMode" (click)="updateEvent(frm.value)" [disabled]="frm.invalid" type="submit" expand="full"

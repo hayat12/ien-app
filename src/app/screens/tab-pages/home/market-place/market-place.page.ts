@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { AppService } from 'src/app/screens/app.service';
 import { DefaultIcon } from 'src/app/app.constant';
 import * as _ from 'lodash';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-market-place',
   templateUrl: './market-place.page.html',
@@ -11,28 +13,43 @@ import * as _ from 'lodash';
 export class MarketPlacePage implements OnInit {
   marketPlacesList = [];
   readonly APP_DEFAULT_ICON = DefaultIcon;
+  isEditable = false;
   constructor(
+    private alertCtrl: AlertController,
     private navCtrl: NavController,
+    private route: ActivatedRoute,
     private appService: AppService
   ) { }
 
   ngOnInit() {
-    this.loadMaketPlaces();
+    // const prm = this.route.snapshot.params.mg;
+    // if (!_.isEmpty(prm)) {
+    //   this.isEditable = true;
+    //   this.loadMaketPlaces(true);
+    // } else {
+    //   this.loadMaketPlaces(false);
+    // }
   }
 
   ionViewDidEnter() {
-    this.loadMaketPlaces();
+    const prm = this.route.snapshot.params.mg;
+    if (!_.isEmpty(prm)) {
+      this.isEditable = true;
+      this.loadMaketPlaces(true);
+    } else {
+      this.loadMaketPlaces(false);
+    }
   }
 
-  loadMaketPlaces() {
-    this.appService.get_ListmarketPlace().subscribe((res: any) => {
+  loadMaketPlaces(isEditable) {
+    this.appService.get_ListmarketPlace(isEditable).subscribe((res: any) => {
       this.marketPlacesList = res;
     });
   }
 
   doRefresh(event) {
     setTimeout(() => {
-      this.loadMaketPlaces();
+      this.loadMaketPlaces(this.isEditable);
       event.target.complete();
     }, 2000);
   }
@@ -47,7 +64,7 @@ export class MarketPlacePage implements OnInit {
 
   search(event) {
     const term  = event.target.value;
-    this.appService.get_search_marketPlace(term).subscribe((res: any) => {
+    this.appService.get_search_marketPlace(term, this.isEditable).subscribe((res: any) => {
       this.marketPlacesList = res;
     });
   }
@@ -61,4 +78,37 @@ export class MarketPlacePage implements OnInit {
     }
     return lb;
   }
+
+  toEdit(id){
+    this.navCtrl.navigateForward(`edit-market-place/${id}`);
+  }
+
+  async presentAlertConfirm(id) {    
+    const alert = await this.alertCtrl.create({
+      header: 'Delete!',
+      message: 'Confirm to delete',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.deleteMKP(id);
+          }
+        }
+      ]
+    });
+
+    alert.present();
+  }
+    deleteMKP(id){
+      this.appService.delete_marketPlace(id).subscribe((res)=>{
+        this.navCtrl.goBack();
+      });
+    }
 }

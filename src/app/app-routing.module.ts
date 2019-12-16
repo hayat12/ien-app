@@ -90,6 +90,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'market-place/:mg',
+    component: MarketPlacePage,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'add-market-place',
     component: AddMarketPlaceComponent,
     canActivate: [AuthGuard]

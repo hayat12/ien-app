@@ -16,7 +16,7 @@ export class ProfilePage implements OnInit {
   userImage = '';
   userDetails: any = [];
   records = [];
-
+  points = 0;
   moduleNameTabs = [
     {
       id: 1,
@@ -45,16 +45,17 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.getUserDetails();
+    this.getPoints();
+    // this.countRecords(res.id);
   }
 
   getUserDetails() {
     this.spinnerDialog.show();
       this.appService.getUserDetails().subscribe(
         (res: any) => {
+          console.log(res);
           this.userDetails = res;
           this.userInfo(res);
-          this.getUserPic(res.id);
-          this.countRecords(res.id);
           this.spinnerDialog.hide();
         },
         (err) => {
@@ -80,11 +81,6 @@ export class ProfilePage implements OnInit {
     return this.myInfo;
   }
 
-  getUserPic(id) {
-    this.appService.get_currentUser(id).subscribe( (res: any) => {
-      // this.userImage = res[0].picture;
-    });
-  }
   manageAgenda() {
     // this.navCtrl.navigateForward('new-adgenda');
     this.navCtrl.navigateForward('agenda-list');
@@ -100,9 +96,9 @@ export class ProfilePage implements OnInit {
     }
   }
   manageMarketPlaces() {
-    this.navCtrl.navigateForward('market-place');
+    this.navCtrl.navigateForward('market-place/mg');
   }
-
+ 
   blankImage(img) {
   let lb = '';
   if (_.isEmpty(img)) {
@@ -116,5 +112,9 @@ export class ProfilePage implements OnInit {
     this.appService.get_records(id).subscribe((res: any) => {
       this.records = res;
     });
+  }
+
+  getPoints(){
+    this.points = 10;
   }
 }

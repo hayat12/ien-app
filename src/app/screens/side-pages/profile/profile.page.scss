@@ -2,7 +2,14 @@ h1 {
   margin: 0;
   font-weight: 300;
 }
-
+ion-header{
+  z-index: 0;
+}
+ion-toolbar {
+  --background: var(--ion-toolbar-background,linear-gradient(to right, #61045F, #AA076B));
+  z-index: 0;
+}
+  
 .profile {
   text-align: center;
 
@@ -92,12 +99,14 @@ h1 {
 .tabs-card{
     text-align: center;
     margin: 0px;
-    height: 120px;
+    height: 110px;
     & ion-icon{
       zoom: 2;
     }
     & .card-content-ios{
       padding: 10px;
+    } .card-content-md{
+      padding: 1px;
     }
   }
 // .point:first-child {}

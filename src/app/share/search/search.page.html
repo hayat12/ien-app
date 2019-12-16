@@ -9,14 +9,25 @@
  
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor = "let item of items" (click)="viewEvent(item.id)">
+    <!-- <ion-item >
       <ion-avatar slot="start">
-        <img [src]="eventBlankPage(item.event_image)">
+        <img >
       </ion-avatar>
       <ion-label>
-        <h2>{{item.event_name}}</h2>
-        <h3>{{item.about_event}}</h3>
-        <p>{{item.created_date | date:'short'}}</p>
+        <h2>{{item.name}}</h2>
+      </ion-label>
+    </ion-item> -->
+
+    <ion-item *ngFor = "let item of items" (click)="viewEvent(item)" class="item-label item ios in-list ion-focusable hydrated">
+      <ion-avatar slot="start" class="ios hydrated">
+        <img [src]="eventBlankPage(item.picture)">
+      </ion-avatar>
+      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+        <h2>{{item.name}}</h2>
+
+        <p *ngIf = "item.route == 'events'">Event</p>
+        <p *ngIf = "item.route == 'agenda'">Agenda</p>
+        <p *ngIf = "item.route == 'market_places'">Market Place</p>
       </ion-label>
     </ion-item>
   </ion-list>

@@ -32,39 +32,23 @@
               <img class="event-imge" [src]="blankImage(item.event_image)">
             </ion-col>
             <ion-col size="6">
-
             <p class="event-name">{{item.event_name | titlecase}}</p>
-              <ion-text color = "medium">{{item.about_event}}</ion-text>
-
-            </ion-col>
+          </ion-col>
             <ion-col size="2">
               <div style="text-align: center">
                   <p class="event-day">{{item.start_date | date: 'd'}}</p>
                   <span class="event-month">{{item.start_date | date: 'MMM'}}</span>
               </div>
-              </ion-col>
+            </ion-col>
+
+            <ion-col size = "12">
+                <ion-text color = "medium">{{item.about_event}}</ion-text>
+            </ion-col>
           </ion-row>
         </ion-grid>
-
-        <!--<ion-grid>
-      <ion-card-content>
-          <ion-row size="12">
-            <ion-col size="2">
-              <div style="text-align: center">
-                  <p class="event-day">{{item.start_date | date: 'd'}}</p>
-                  <span class="event-month">{{item.start_date | date: 'MMM'}}</span>
-              </div>
-            </ion-col>
-            <ion-col>
-              <p class="event-name">{{item.event_name | titlecase}}</p>
-              <ion-text color = "medium">{{item.about_event}}</ion-text>
-            </ion-col>
-          </ion-row>
-        </ion-grid> -->
 <ion-item>
-      <!-- <ion-button size="small" color="danger" shape="round" slot="start" color="tertiary"></ion-button> -->
       <ion-label (click) = "toAttend(item.id)" size="small" color="dark" fill="outline" slot="start">
-        <span class="attend-no">45</span>
+        <span class="attend-no">{{item.joined_user}}</span>
         &nbsp;Attending</ion-label>
       <ion-button (click) = "toEdit(item.id)" size="small" slot="end" color="tertiary">
         <ion-icon name="create"></ion-icon>
@@ -73,18 +57,6 @@
         <ion-icon name="trash"></ion-icon>
       </ion-button>
 </ion-item>
-        <!-- comment %} <ion-grid>
-          <ion-row size="12">
-            <ion-col size="8">Attending </ion-col>
-            <ion-col size="2">
-              <ion-icon name="create"></ion-icon>
-            </ion-col>
-            <ion-col size="2">
-              <ion-icon name="trash"></ion-icon>
-            </ion-col>
-          </ion-row>
-      </ion-card-content>
-        </ion-grid> -->
 
     </ion-card>
   </section>

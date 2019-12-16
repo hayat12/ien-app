@@ -3,14 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppService } from '../../app.service';
 import { DefaultIcon } from 'src/app/app.constant';
 import { Location } from '@angular/common';
-import { Camera } from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { ToastController, NavController, Events } from '@ionic/angular';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import * as _ from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
-
 @Component({
   selector: 'app-create-event',
   templateUrl: 'create-event.page.html',
@@ -55,8 +54,8 @@ export class CreateEventPage implements OnInit {
 
   loadEvent(id) {
     this.appService.get_event(id).subscribe((res: any) => {
-      if (res.length > 0) {
-        this.patchEvent(res[0]);
+      if (!_.isEmpty(res)) {
+        this.patchEvent(res);
       }
     });
   }
@@ -85,8 +84,6 @@ export class CreateEventPage implements OnInit {
         event_name: ['', Validators.required],
         category: [''],
         created_by: [1],
-        user: [1],
-        // qty: [0, [Validators.required, Validators.min(0)]],
         event_image: [null],
         start_date: ['', Validators.required],
         start_time: ['', Validators.required],
@@ -110,7 +107,6 @@ export class CreateEventPage implements OnInit {
       category: data.category,
       created_by: 1,
       user: 1,
-      // qty: data.qty,
       start_date: data.start_date,
       start_time: data.start_time,
       end_date: data.end_date,
@@ -122,11 +118,10 @@ export class CreateEventPage implements OnInit {
     // formData.append('event_image', this.image, JSON.stringify(o));
     this.appService.queryCreateEvent(o).subscribe(
       (res: any) => {
-        this.onSuccess(res);
         if (this.imagePath != null) {
           this.uploadFile(res.id);
         } else {
-          this.navCtrl.navigateBack('events', 'mg');
+          this.navCtrl.goBack();
         }
       }, (err) => {
         console.log(err);
@@ -150,18 +145,26 @@ export class CreateEventPage implements OnInit {
   }
 
   chooseImage() {
-    this.fileChooser.open()
-    .then(uri => {
-      // this.uploadFile(uri);
-      this.imagePath = uri;
-    })
-    .catch(e => {
-      console.log(e);
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      encodingType: this.camera.EncodingType.JPEG,
+    }
+  
+    this.camera.getPicture(options).then((imageData) => {
+      // this.uploadFile(imageData);
+      this.imagePath = imageData;
+    }, (err) => {
+      console.log(err);
     });
   }
 
-  uploadFile(eventId) {
+  uploadFile(id) {
     const token = localStorage.getItem('ien_token');
+    if (_.isEmpty(token)) {
+      return;
+    }
     const fileTransfer: FileTransferObject = this.transfer.create();
     const options: FileUploadOptions = {
       fileKey: 'picture',
@@ -169,14 +172,13 @@ export class CreateEventPage implements OnInit {
       chunkedMode: false,
       mimeType: 'image/jpeg',
       headers: {
-        'Authorization': `Token ${token}`
+        'Authorization': `Bearer ${token}`
       }
     };
-    fileTransfer.upload(this.imagePath, `${this.appService.baseUrl}/api/event/test-upload/${eventId}`, options)
+
+    fileTransfer.upload(this.imagePath, `http://linkinnet.com/IENGlobal/public/api/event-picture/${id}`, options)
       .then((data) => {
-        const message = 'Successfully uploaded';
-        this.presentToast(message);
-        this.navCtrl.navigateBack('events');
+        this.navCtrl.goBack();
       }, (err) => {
         console.log(err);
       });
@@ -218,5 +220,12 @@ export class CreateEventPage implements OnInit {
       lb = img;
     }
     return lb;
+  }
+
+  uploadImage(files: FileList){
+    const f = files.item(0);
+    this.appService.get_testImg(f).subscribe((res)=>{
+      console.log(res);
+    })
   }
 }

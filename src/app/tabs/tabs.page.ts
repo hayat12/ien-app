@@ -16,7 +16,6 @@ export class TabsPage {
   ];
 
   selectedTab(evn, val) {
-    console.log(evn);
     let s = '';
     if (val === 'tab-selected') {
       s = 'light';

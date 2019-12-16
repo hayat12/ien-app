@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   // baseUrl: 'http://192.168.0.100:8000'
-  baseUrl: 'http://hayat12.pythonanywhere.com'
-  // baseUrl: 'http://192.168.0.169:8000'
+  // baseUrl: 'http://hayat12.pythonanywhere.com'
+  baseUrl: 'http://linkinnet.com/IENGlobal/public/api'
 };
 
 /*

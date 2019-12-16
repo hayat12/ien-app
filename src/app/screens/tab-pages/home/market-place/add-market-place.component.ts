@@ -4,6 +4,7 @@ import { AppService } from 'src/app/screens/app.service';
 import { NavController, ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
+import { DefaultIcon } from 'src/app/app.constant';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
@@ -14,9 +15,10 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
 })
 export class AddMarketPlaceComponent implements OnInit {
   fGroup: FormGroup;
-  imagePath: any = null;
+  imagePath = null;
   isEditMode = false;
-  logo: File = null;
+  readonly APP_DEFAULT_ICON = DefaultIcon;
+  uri = null;
   constructor (
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -40,18 +42,28 @@ export class AddMarketPlaceComponent implements OnInit {
     }
   }
 
+
   chooseImage() {
-    this.fileChooser.open()
-    .then( (uri: any) => {
-      this.imagePath = uri;
-    })
-    .catch(e => {
-      console.log(e);
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      encodingType: this.camera.EncodingType.JPEG,
+    }
+  
+    this.camera.getPicture(options).then((imageData) => {
+      // this.uploadFile(imageData);
+      this.imagePath = imageData;
+    }, (err) => {
+      console.log(err);
     });
   }
 
   uploadFile(id) {
     const token = localStorage.getItem('ien_token');
+    if (_.isEmpty(token)) {
+      return;
+    }
     const fileTransfer: FileTransferObject = this.transfer.create();
     const options: FileUploadOptions = {
       fileKey: 'picture',
@@ -59,17 +71,20 @@ export class AddMarketPlaceComponent implements OnInit {
       chunkedMode: false,
       mimeType: 'image/jpeg',
       headers: {
-        'Authorization': `Token ${token}`
+        'Authorization': `Bearer ${token}`
       }
     };
-    fileTransfer.upload(this.imagePath, `${this.appService.baseUrl}/api/market-place-pictures/${id}`, options)
+
+    fileTransfer.upload(this.imagePath, `http://linkinnet.com/IENGlobal/public/api/market-place-picture/${id}`, options)
       .then((data) => {
-        console.log(data);
-        this.navCtrl.navigateBack('/market-place');
+        // alert(JSON.stringify(data));
+        this.navCtrl.goBack();
       }, (err) => {
+        // alert(JSON.stringify(err));
         console.log(err);
       });
   }
+
 
   getToken () {
     return localStorage.getItem('ien_token');
@@ -86,11 +101,21 @@ export class AddMarketPlaceComponent implements OnInit {
       });
   }
   reloadMarketPlace(eventId) {
-    this.appService.get_marketPlace(eventId).subscribe((res) => {
-      this.patchData(res[0]);
+    this.appService.get_marketPlace(eventId).subscribe((res: any) => {
+      this.uri = res.picture;
+      this.patchData(res);
     });
   }
 
+  blankImg(){
+    let i = null; 
+    if (_.isEmpty(this.uri)) {
+      i = this.APP_DEFAULT_ICON.EVENT_IMAGE;
+    } else {
+      i = this.uri;
+    }
+    return i;
+  }
   patchData(data) {
     this.fGroup.patchValue(
       {
@@ -105,29 +130,21 @@ export class AddMarketPlaceComponent implements OnInit {
       if (this.imagePath != null) {
         this.uploadFile(res.id);
       } else {
-        this.navCtrl.navigateBack('/market-place');
+        this.navCtrl.goBack();
       }
       // this.navCtrl.navigateForward('/market-place');
     });
   }
-
-  // uploadImage(evet: FileList) {
-  //   if (evet.length > 0) {
-  //     const picture = evet.item(0);
-  //       const formData = new FormData();
-  //       formData.append('picture', picture);
-  //       this.appService.post_marketPlaceUploadPicture(formData, 1 ).subscribe((res) => {
-  //         console.log(res);
-  //       });
-  //   }
-  // }
-
-  // updateMarketPlace(data) {
-  //   const eventId = this.route.snapshot.params.id;
-  //   this.appService.put_UpdateMarketPlace(data, eventId).subscribe((res) => {
-  //     this.navCtrl.navigateForward('/market-place');
-  //   });
-  // }
+  updateMarketPlace(data){
+    const id = this.route.snapshot.params.id;
+    this.appService.put_UpdateMarketPlace(data,id).subscribe((res: any) => {
+      if (this.imagePath != null) {
+        this.uploadFile(res.id);
+      } else {
+        this.navCtrl.goBack();
+      }
+    });
+  }
 
 }
 

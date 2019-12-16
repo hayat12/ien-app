@@ -51,6 +51,9 @@ export class GlobalEventList implements OnInit {
     this.navCtrl.navigateForward(`event-details/${events.id}`);
   }
   search(event) {
-    console.log(event);
+    const term = event.target.value;
+    this.appService.get_searchEvent(term, false).subscribe((res: any)=>{
+      this.event_list = res;
+    });
   }
 }

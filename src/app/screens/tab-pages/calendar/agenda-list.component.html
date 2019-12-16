@@ -15,18 +15,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding *ngIf = "adgList">
   <ion-card class="bg-primary" *ngFor="let o of adgList" class="agend-item">
     <ion-card-content>
       <ion-grid (click)="viewAgenda(o.id)">
         <ion-row>
           <ion-col size="4">
             <ion-text class="card-time">
-              {{o.start_time | date:'h:mm:ss a'}}
+              {{o.start_time}}
             </ion-text>
             <ion-text>
               <p class="date">{{o.start_date | date:'d MMM y'}}</p>
-              <p class="card-time-ago">{{o.start_date | date:'h:mm'}}&nbsp;mins</p>
+              <!-- <p class="card-time-ago">{{o.start_date | date:'h:mm'}}&nbsp;mins</p> -->
             </ion-text>
 
           </ion-col>
@@ -60,12 +60,11 @@
 
       <ion-grid>
         <ion-row>
-          <ion-col size="8">
+          <ion-col size="12" align-self-end>
             <ion-button (click)="editAgenda(o.id)" size="small" color="tertiary">
               <ion-icon name="create"></ion-icon>
             </ion-button>
-          </ion-col>
-          <ion-col size="4">
+         
             <ion-button (click)="presentAlertConfirm(o.id, {action: 'delete'})" size="small" color="danger">
               <ion-icon name="trash"></ion-icon>
             </ion-button>

@@ -18,9 +18,9 @@ export class AppComponent {
     [
       { title: 'Profile', url: '/profile', icon: 'contact' },
       { title: 'Invite A Friend', url: '/invite-connection', icon: 'hand' },
-      { title: 'Favourite', url: '/profile', icon: 'heart' },
-      { title: 'Resources', url: '/profile', icon: 'bookmarks' },
-      { title: 'Setting', url: '/profile', icon: 'settings' },
+      { title: 'Favourite', url: 'tabs', icon: 'heart' },
+      { title: 'Resources', url: 'tabs', icon: 'bookmarks' },
+      { title: 'Setting', url: 'tabs', icon: 'settings' },
     ];
 
   constructor (
@@ -55,9 +55,17 @@ export class AppComponent {
     });
   }
 
+  subscribeEvent(){
+    this.events.subscribe('uploadedProfile:created', (user, time) => {
+      this.getUserDetails();
+    });
+  }
   getUserDetails() {
     this.appService.getUserDetails().subscribe(
       (res: any) => {
+        if (res.picture != null) {
+          this.imgUrl = res.picture;
+        }
         this.userInfo(res);
       },
       (err) => {
@@ -67,7 +75,7 @@ export class AppComponent {
 
   userInfo(user): string {
     if (_.isEmpty(user.first_name) && _.isEmpty(user.last_name)) {
-      this.myInfo = user.username;
+      this.myInfo = user.email;
     } else {
       this.myInfo = user.first_name + ' ' + user.last_name;
     }
@@ -91,6 +99,7 @@ export class AppComponent {
       }
     });
   }
+
   logOut() {
     localStorage.removeItem('ien_token');
     this.menueCtrl.enable(false);

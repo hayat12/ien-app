@@ -9,17 +9,22 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="list">
-
-    <ion-list>
-        <ion-item>
-            <ion-label>Pokémon Yellow</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-label>Mega Man X</ion-label>
-        </ion-item>
-    </ion-list>
-
+<ion-content>
+    <ion-list *ngIf="list" class="ios list-ios hydrated">
+            <ion-list-header class="ios hydrated">
+              Attending to event
+            </ion-list-header>
+            <ion-item *ngFor = "let o of list" class="item-label item ios in-list ion-focusable hydrated">
+              <ion-avatar slot="start" class="ios hydrated">
+                <img [src]="blankImage(o.picture)">
+              </ion-avatar>
+              <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+                <h2>{{blankName(o)}}</h2>
+                <!-- <h3>Look, kid...</h3>
+                <p>I've got enough on my plate as it is, and I...</p> -->
+              </ion-label>
+            </ion-item>
+          </ion-list>
 
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles">

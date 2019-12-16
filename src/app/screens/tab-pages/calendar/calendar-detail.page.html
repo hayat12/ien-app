@@ -1,52 +1,47 @@
 <ion-header>
   <ion-toolbar class="bg-toolbar">
     <ion-buttons slot="start">
-      <ion-back-button color="light" defaultHref="/tabs/(tab2:tab2)"></ion-back-button>
+      <ion-back-button color="light" defaultHref="tabs/(tab2:tab2)"></ion-back-button>
     </ion-buttons>
     <ion-title color="light">
       Calendar Detail
     </ion-title>
-    <!-- <ion-buttons slot="end">
-      <ion-button (click)="presentAlertConfirm()">
-        <ion-icon color="light" ios="ios-more" md="md-more"></ion-icon>
-      </ion-button>
-    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="agenda">
   <ion-item lines="none">
-    <h1>{{agenda.title | titlecase}}</h1>
+    <h1>{{agenda.agenda.title | titlecase}}</h1>
   </ion-item>
   <div padding>
     <ion-text color='medium'>
-      <ion-icon size="medium" name="pin"></ion-icon> {{agenda.address}}
+      <ion-icon size="medium" name="pin"></ion-icon> {{agenda.agenda.address}}
     </ion-text><br>
     <ion-text color='medium'>
-      <ion-icon size="medium" name="time"></ion-icon> {{agenda.start_date | date: 'MMM d y'}}
+      <ion-icon size="medium" name="time"></ion-icon> {{agenda.agenda.start_date | date: 'MMM d y'}}
     </ion-text>
   </div>
-  <ion-card *ngIf = "invitedList.length > 0">
-    <ion-card-content class="invities-card">
-      <span *ngFor="let o of invitedList">
-        <ion-avatar>
-          <img [src]="o.picture">
-        </ion-avatar>
-      </span>
-    </ion-card-content>
-  </ion-card>
+
+  <ion-row *ngIf="invitedList.length > 0" padding>
+    <span *ngFor="let o of invitedList">
+      <ion-avatar>
+          <img [src]="blankImg(o.picture)">
+      </ion-avatar>
+    </span>
+  </ion-row>
 
   <ion-card>
     <ion-card-header>
       <h3>Agenda</h3>
     </ion-card-header>
     <ion-card-content>
-      {{agenda.notes}}
+      {{agenda.agenda.notes}}
     </ion-card-content>
     <ion-item lines="none">
-      Hosted By&nbsp; <ion-avatar> <img
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"> </ion-avatar>
+      Hosted By&nbsp; <ion-avatar> <img [src]="blankImg(agenda.user.picture)"> </ion-avatar>
+      &nbsp;{{blankName(agenda.user)}}
     </ion-item>
     <br>
   </ion-card>
 </ion-content>
+<ion-button color="danger" (click)="joinNow()" expand="full">I am Coming</ion-button>

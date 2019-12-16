@@ -26,7 +26,8 @@
     <section *ngIf = "isSubmittedStep1" id="section-1" padding>
       <ion-card-content class="pp-img-card">
         <div (click)="chooseImage()">
-          <img class="user-pp" [src]="blankImage(imgUrl)">
+          <img *ngIf = "userDetails" class="user-pp" [src]="userDetails.picture">
+          <img *ngIf = "!userDetails" class="user-pp" [src]="this.APP_DEFAULT_ICON">
         </div>
       </ion-card-content>
       <!-- <input type="file" (change)="uploadImage($event.target.files)" accept="image/*" multiple="false" type="file"> -->

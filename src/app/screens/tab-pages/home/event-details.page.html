@@ -19,11 +19,7 @@
       <ion-card-content>
         <ion-text color="dark">
           <span class="card-title">{{event.event_name |titlecase}}</span>
-        </ion-text><br>
-        <ion-text color="medium">
-          {{event.about_event}}
         </ion-text>
-
         <br><br><ion-list>
           <span>
             <ion-icon color="dark" size="small" name="pin"></ion-icon>&nbsp;
@@ -54,4 +50,4 @@
     </ion-refresher-content>
   </ion-refresher>
 </ion-content>
-<ion-button color="tertiary" (click)="getTicket()" expand="full">Get Ticket</ion-button>
+<ion-button color="tertiary" (click)="getTicket()" expand="full">Get Ticket</ion-button> 

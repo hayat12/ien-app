@@ -45,7 +45,7 @@ export class AgendaComponent implements OnInit {
   }
   loadAdgenda(id) {
     this.appService.get_adgenda(id).subscribe((res) => {
-      this.patchformData(res[0]);
+      this.patchformData(res);
     });
   }
 
@@ -73,18 +73,18 @@ export class AgendaComponent implements OnInit {
   saveAdgenda(data) {
     const lst = JSON.parse(localStorage.getItem('invite-pp'));
     const t = data.start_time
-    const s = t.split(':');
-    const mins = s[1];
-    const hour = s[0];
-    const myDate = new Date(data.start_date); 
-    const strTime = moment(myDate).add(hour, 'hours').add(mins, 'minutes').format('YYYY-MM-DD hh:mm:ss');    
+    // const s = t.split(':');
+    // const mins = s[1];
+    // const hour = s[0];
+    // const myDate = new Date(data.start_date); 
+    // const strTime = moment(myDate).add(hour, 'hours').add(mins, 'minutes').format('YYYY-MM-DD hh:mm:ss');    
     const postData = {
       invites: lst,
       title: data.title,
       notes: data.notes,
       address: data.address,
       start_date: data.start_date,
-      start_time: strTime
+      start_time: data.start_time
     };
     this.appService.post_adgenda(postData).subscribe((res) => {
       localStorage.removeItem('invite-pp');

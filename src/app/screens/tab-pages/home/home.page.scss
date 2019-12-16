@@ -5,6 +5,9 @@
   padding-left: 30px;
   background-color: white;
 }
+.sc-ion-card-md-h{
+  margin: 5px;
+}
 // ion-spinner {
 //   --background-color: rebeccapurple;
 //   }
@@ -70,8 +73,8 @@ ion-content{
     overflow: hidden;
   }
   .mkt-custom-card{
-    min-width: 40%;
-    max-width: 40%;
+    min-width: 47%;
+    max-width: 47%;
     max-height: 220px;
     min-height: 220px;
   }
@@ -94,7 +97,7 @@ ion-content{
     color: gray;
   }
   .sc-ion-card-ios-h{
-    margin: 10px 8px;
+    margin: 10px 4px;
   }
   .event-card-img{
     object-fit: cover;

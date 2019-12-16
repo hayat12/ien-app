@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Events, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from '../../app.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { PopoverController } from '@ionic/angular';
 import { DefaultIcon } from 'src/app/app.constant';
 import * as _ from 'lodash';
@@ -17,7 +16,6 @@ import { ToastController } from '@ionic/angular';
 export class EventDetailsPage implements OnInit {
   event: any = [];
   isEditable = false;
-  formgroup: FormGroup;
   readonly  methods = Methods;
   readonly APP_DEFAULT_ICON = DefaultIcon;
   constructor(
@@ -57,7 +55,7 @@ export class EventDetailsPage implements OnInit {
   getEvent(eventId) {
     this.appService.get_event(eventId).subscribe(
       (res) => {
-        this.event = res[0];
+        this.event = res;
       },
       (error) => {
         console.log(error);
@@ -67,8 +65,8 @@ export class EventDetailsPage implements OnInit {
 
   getTicket() {
     const eventId = this.route.snapshot.params.id;
-    this.appService.get_getTicket(eventId).subscribe((res) => {
-      this.presentToast('You have successfully booked a teckit');
+    this.appService.get_getTicket(eventId).subscribe((res:any) => {
+      this.presentToast(res.message);
       // this.navCtrl.goBack();
     });
   }

@@ -47,11 +47,16 @@ export class LoginPage implements OnInit {
     this.serivce.queryLogin(user)
       .subscribe(
         (res: any) => {
-          localStorage.setItem('ien_token', res.token);
-          this.navCtrl.navigateRoot(`tabs/(tab1:tab1)`);
-          this.events.publish('user', { login: true });
-        },
-        (error) => {
+          if (res.access_token != undefined) {
+            localStorage.setItem('ien_token', res.access_token);
+            this.navCtrl.navigateRoot(`tabs/(tab1:tab1)`);
+            this.events.publish('user', { login: true });
+            const message = "Successfully Logged In";
+            this.presentToast(message);
+          } else {
+            this.onError('error');
+          }
+        }, (error) => {
           this.onError(error);
         }
       );
@@ -70,28 +75,56 @@ export class LoginPage implements OnInit {
   }
 
   LoginWithGoogle() {
-    this.googlePlus.login({}).
-      then((res) => {
-        const body = {
-          email: res.email,
-          first_name: res.givenName,
-          last_name: res.familyName
-        };
-        localStorage.setItem('gmailCredencial', JSON.stringify(body));
-        const o = {'user': body, message: 'Wecome', 'time': new Date};
-        localStorage.setItem('welcomeMsg', JSON.stringify(o));
-        this.navCtrl.navigateForward(`set-password`);
-        const message = `${res.givenName} your registred with ${res.email}`;
-        this.presentToast(message);
+    this.googlePlus.login({}).then((res) => {
+      const o = {
+        email: res.email,
+        name: res.familyName,
+        password: res.userId,
+        password_confirmation: res.userId
+      }
+      this.serivce.loginWithGmail(o).subscribe((res: any) => {
+        if (res.access_token != undefined) {
+          localStorage.setItem('ien_token', res.access_token);
+          this.navCtrl.navigateRoot(`tabs/(tab1:tab1)`);
+          const message = "Successfully Logged In";
+          this.presentToast(message);
+          this.events.publish('user', { login: true });
+        } else {
+          this.onError('error');
+        }
       })
-      .catch(err => {
-        console.log(err);
-        this.onError(err);
-      });
+    });
+    //     const d = new Date();
+    //     const password = Math.random().toString(36).substring(7);
+    //     const body = {
+    //       email: res.email,
+    //       // first_name: res.givenName,
+    //       // last_name: res.familyName,
+    //       name: res.familyName,
+    //       password: password,
+    //       password_confirmation: password
+    //     };
+    //     this.serivce.loginWithGmail(body).subscribe((res: any) => {
+    //       // localStorage.setItem('gmailCredencial', JSON.stringify(body));
+    //       // const o = { 'user': body, message: 'Wecome', 'time': new Date };
+    //       // localStorage.setItem('welcomeMsg', JSON.stringify(o));
+    //       // // this.navCtrl.navigateForward(`set-password`);
+    //       // const message = `${res.givenName} your registred with ${res.email}`;
+
+    //       localStorage.setItem('ien_token', res.access_token);
+    //       this.navCtrl.navigateRoot(`tabs/(tab1:tab1)`);
+    //       this.events.publish('user', { login: true });
+    //       this.presentToast(res);
+    //     })
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //     this.onError(err);
+    //   });
   }
 
   onError(error) {
-    const message = 'something went wrong';
+    const message = 'Login failed';
     this.presentToast(message);
   }
 

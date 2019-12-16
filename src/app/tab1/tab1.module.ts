@@ -8,7 +8,6 @@ import { HomePage } from '../screens/tab-pages/home/home.page';
 import { NotificationPage } from '../screens/tab-pages/notification/notification.page';
 import { ContactsPage } from '../screens/tab-pages/contacts/contacts.page';
 import { BusinessMatchingPage } from '../screens/tab-pages/business-matching/business-m.page';
-import { EventPage } from '../screens/tab-pages/home/event.page';
 import { MyMonthPipe } from '../share/pipe/my-month.pipe';
 import { CalendarPage } from '../screens/tab-pages/calendar/calendar.page';
 @NgModule({

@@ -16,33 +16,49 @@
 <ion-content>
 
   <ion-item lines="none" text-wrap>
-    <ion-fab slot="start">
+    <ion-fab style="margin-left: 10px;">
       <span class="ca-name">Calendar</span>
     </ion-fab>
-
-    <ion-fab (click)="addNewAdgenda()" horizontal="end">
-      <ion-icon color="light" size="large" name="add-circle-outline"></ion-icon>
+    <ion-fab horizontal="end">
+      <ion-icon color="light" ios="ios-refresh" md="md-refresh" size="large" ></ion-icon> &nbsp;&nbsp;
+      <ion-icon (click)="addNewAdgenda()" color="light" size="large" name="add-circle-outline"></ion-icon>
     </ion-fab>
-
   </ion-item>
 
-  <ion-item lines="none">
+  <!-- <ion-item lines="none">
     <i slot="start" class="fa fa-angle-left f-arrow-icon" aria-hidden="true"></i>
     <div class="months-list">
       <ion-text *ngFor="let o of monthsList let i = index" class="months-name" (click)="setActiveWeek(i)" color="none"
         [ngClass]="activeWeek(i)">{{o.short}}</ion-text>
     </div>
     <i slot="end" class="fa fa-angle-right f-arrow-icon" aria-hidden="true"></i>
-  </ion-item>
+  </ion-item> -->
 
-  <!--  <div>
-    <div class="days-list">
-        <ion-badge class="day-name" *ngFor = "let o of daysList let i = index" (click) = "setActiveWeek(i)" color = "none" [ngClass] = "activeWeek(i)">
-          <p color="none">{{o.short}}</p>
-          <span class="day-no" color="none">31</span>
-        </ion-badge>
-    </div>
-  </div> -->
+  <ion-grid fixed class="custom-grid">
+    <ion-row>
+      <ion-col size="12" class="custom-col">
+        <ion-segment scrollable (ionChange)="myMonth($event.detail.value)">
+          <ion-segment-button *ngFor="let ms of MonthsName" [value]="ms">
+            <ion-label color="light">{{ms.name}}</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid fixed class="custom-grid">
+    <ion-row>
+      <ion-col size="12" class="custom-col col-days">
+        <ion-segment scrollable (ionChange)="myDay($event.detail.value)">
+          <ion-segment-button *ngFor="let ds of mList" [value]="ds">
+            <ion-label color="light">{{ds}}</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 
   <div class="list-body">
     <ion-card class="bg-primary" *ngFor="let o of adgList" class="agend-item" (click)="viewAdgenda(o.id)">
@@ -51,13 +67,12 @@
           <ion-row>
             <ion-col size="4">
               <ion-text class="card-time">
-                {{o.start_time | date:'h:mm:ss a'}}
+                {{o.start_time}}
               </ion-text>
               <ion-text>
                 <p class="date">{{o.start_date | date:'d MMM y'}}</p>
-                <p class="card-time-ago">{{o.start_date | date:'h:mm'}}&nbsp;mins</p>
+                <!-- <p class="card-time-ago">{{o.start_date | date:'h:mm'}}&nbsp;mins</p> -->
               </ion-text>
-
             </ion-col>
             <ion-col>
               <ion-text class="card-adg-name">
@@ -65,33 +80,24 @@
               </ion-text>
               <p class="location">{{o.address}}</p>
               <p class="details">{{o.notes}}.</p>
-
-              <!-- <ul class="invitees">
-                <li>
-                  <img src="assets/default-icon/user.jpg" />
-                </li>
-                <li>
-                  <img src="assets/default-icon/user.jpg" />
-                </li>
-                <li>
-                  <img src="assets/default-icon/user.jpg" />
-                </li>
-                <li>
-                  <img src="assets/default-icon/user.jpg" />
-                </li>
-                <li>
-                  <span>4+</span>
-                </li>
-              </ul> -->
             </ion-col>
+          </ion-row>
+          <ion-row>
+            <!-- <span *ngFor = "let o of getJoiedUser(o)">
+                <ion-avatar>
+                    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                  </ion-avatar>
+            </span> -->
+            <!-- SELECT * , (SELECT users.picture FROM users WHERE users.id = agendas.id) AS "joined_user" FROM `agendas` -->
           </ion-row>
         </ion-grid>
 
       </ion-card-content>
     </ion-card>
+    <!-- <ion-calendar></ion-calendar> -->
   </div>
 
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>

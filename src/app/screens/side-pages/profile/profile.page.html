@@ -1,16 +1,22 @@
-<ion-header class="bg-primary" color="light">
-  <ion-back-button defaultHref="tabs/(tab1:tab1)"></ion-back-button>
-  <ion-title>IEN Global</ion-title>
+<ion-header class="bg-primary">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="tabs/(tab1:tab1)"></ion-back-button>
+    </ion-buttons>
+    <ion-title color = "light">IEN Global</ion-title>
+  </ion-toolbar>
 </ion-header>
+
 
 <ion-content color="light">
   <ion-grid class="bg-primary">
     <ion-row>
       <ion-col class="profile">
-        <img style="border:2px solid lightgray; padding: 2px; object-fit: contain" [src]="blankImage(userImage)" alt="">
+        <img style="border:2px solid lightgray; padding: 2px;" [src]="blankImage(userDetails.picture)" alt="">
         <h2>{{myInfo}}</h2>
         <!-- <h5>Founder / CEO</h5> -->
-        <ion-button (click)="createProfile()" size="small" color="light" fill="outline" shape="round">Manage Profile</ion-button>
+        <ion-button (click)="createProfile()" size="small" color="light" fill="outline" shape="round">Manage Profile
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -20,7 +26,7 @@
       <ion-col size="6" class="points">
         <h4>Trading Pts:</h4>
         <p>Widthdrawable: <span>_pts_</span></p>
-        <p class="total">__pts__</p>
+        <p class="total">{{points}} Point (s)</p>
       </ion-col>
       <ion-col size="6" class="points">
         <h4>Commitment Pts:</h4>
@@ -32,16 +38,19 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col *ngFor = "let ob of moduleNameTabs; let i = index" size="6">
+      <ion-col *ngFor="let ob of moduleNameTabs; let i = index" size="6">
         <ion-card class="manage-option" class="tabs-card" (click)="manageEvent(ob.id, i)">
           <ion-card-content>
             <ion-grid>
               <ion-row>
                 <ion-col class="icon">
                   <ion-icon [name]="ob.icon" color="tertiary"></ion-icon>
-                  <ion-badge *ngIf = "records.length > 0 && ob.id ==1" color="danger">{{records[0].count_event}}</ion-badge>
-                  <ion-badge *ngIf = "records.length > 0 && ob.id ==2" color="danger">{{records[0].count_agenda}}</ion-badge>
-                  <ion-badge *ngIf = "records.length > 0 && ob.id ==3" color="danger">{{records[0].count_market_place}}</ion-badge>
+                  <ion-badge *ngIf="records.length > 0 && ob.id ==1" color="danger">{{records[0].count_event}}
+                  </ion-badge>
+                  <ion-badge *ngIf="records.length > 0 && ob.id ==2" color="danger">{{records[0].count_agenda}}
+                  </ion-badge>
+                  <ion-badge *ngIf="records.length > 0 && ob.id ==3" color="danger">{{records[0].count_market_place}}
+                  </ion-badge>
                 </ion-col>
                 <ion-col size="12">
                   <ion-text color="tertiary">{{ob.name}}</ion-text>

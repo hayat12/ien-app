@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { DefaultIcon } from 'src/app/app.constant';
+import { ActionSheetController } from '@ionic/angular';
 @Component({
     selector: 'app-view-market-place',
     templateUrl: './view.page.html',
@@ -18,6 +19,7 @@ export class ViewMarketPlace implements OnInit {
     readonly APP_DEFAULT_ICON = DefaultIcon;
     constructor(
         private fb: FormBuilder,
+        public actionSheetController: ActionSheetController,
         private navCtrl: NavController,
         private appService: AppService,
         private route: ActivatedRoute
@@ -30,8 +32,8 @@ export class ViewMarketPlace implements OnInit {
     getMarketPlace() {
         const id = this.route.snapshot.params.id;
         this.appService.get_marketPlace(id).subscribe((res: any) => {
-            if (res.length > 0) {
-                this.list = res[0];
+            if (!_.isEmpty(res)) {
+                this.list = res;
             } else {
                 this.list = [];
             }
@@ -41,11 +43,33 @@ export class ViewMarketPlace implements OnInit {
     blankImage(img) {
         let b = null;
         if (_.isEmpty(img)) {
-          b = this.APP_DEFAULT_ICON.EVENT_IMAGE;
+            b = this.APP_DEFAULT_ICON.EVENT_IMAGE;
         } else {
-          b = img;
+            b = img;
         }
         return b;
     }
 
+    async boyNow() {
+        const actionSheet = await this.actionSheetController.create({
+            header: 'Add to Card',
+            buttons: [{
+              text: 'Coming Soon',
+            //   role: 'destructive',
+            //   icon: 'trash',
+              handler: () => {
+                console.log('Delete clicked');
+              }
+            },{
+              text: 'Cancel',
+              icon: 'close',
+              role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+              }
+            }
+        ]
+          });
+          await actionSheet.present();
+    }
 }

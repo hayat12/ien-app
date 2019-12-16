@@ -50,8 +50,15 @@ export class SearchPage implements OnInit {
       });
     }
   }
-  viewEvent(event_id) {
-    this.navCtrl.navigateForward(`/event-details/${event_id}`);
+  viewEvent(data) {
+    if (data.route =='events') {
+      this.navCtrl.navigateForward(`/event-details/${data.id}`);
+    } else if (data.route == 'agenda') {
+      this.navCtrl.navigateForward(`/calendar-details/${data.id}`);
+    } else {
+      this.navCtrl.navigateForward(`/view-market-place/${data.id}`);
+    }
+    
   }
 
   onSuccess(res) {

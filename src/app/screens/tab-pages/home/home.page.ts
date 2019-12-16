@@ -34,7 +34,7 @@ export class HomePage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    // this.presentLoading();
+    this.presentLoading();
     this.get_eventList();
     this.loadMarketPlace();
   }
@@ -45,7 +45,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   refresher() {
     setTimeout(() => {
-      // this.presentLoading();
+      this.presentLoading();
       this.get_eventList();
       this.loadMarketPlace();
     }, 5000);
@@ -77,13 +77,14 @@ export class HomePage implements OnInit, OnDestroy {
   get_eventList() {
     this.appService.get_globalEvent().subscribe((res) => {
       this.event_list = res;
+      // this.loading.dismiss();
     });
   }
 
   loadMarketPlace() {
-    this.appService.get_ListmarketPlace().subscribe((res) => {
+    this.appService.get_ListmarketPlace(false).subscribe((res) => {
       this.market_place_list = res;
-      //  this.loading.dismiss();
+       this.loading.dismiss();
     });
   }
 

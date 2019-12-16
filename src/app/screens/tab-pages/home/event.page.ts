@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Events, NavController, ModalController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from '../../app.service';
@@ -12,9 +12,10 @@ import { AlertController } from '@ionic/angular';
   templateUrl: 'event.page.html',
   styleUrls: ['event.page.scss'],
 })
-export class EventPage implements OnInit {
+export class EventPage implements OnInit, OnChanges{
   event_list: any = [];
   currentMonth: any;
+  isEditable = false;
   readonly APP_DEFAULT_ICON = DefaultIcon;
   constructor(
     private events: Events,
@@ -29,17 +30,29 @@ export class EventPage implements OnInit {
       });
   }
 
-  ngOnInit() {
-    const o = localStorage.getItem('ien_token');
+  ionViewWillEnter() { // THERE IT IS!!!
     const mg = this.route.snapshot.params.mg;
     if (mg === 'mg') {
+      this.isEditable = true;
       this.listMyEvent();
+      this.loadAttendingEvents();
     } else {
+      this.isEditable = false;
       this.listEvent();
     }
-    // this.modal.dismiss((res) => {
-    //   console.log(res);
-    // });
+  }
+
+  ngOnChanges(){
+    console.log('Updated');
+  }
+
+  ngOnInit() {
+    // const mg = this.route.snapshot.params.mg;
+    // if (mg === 'mg') {
+    //   this.listMyEvent();
+    // } else {
+    //   this.listEvent();
+    // }
   }
 
   search(ev) {
@@ -52,7 +65,7 @@ export class EventPage implements OnInit {
   }
 
   searchEvents(term) {
-    this.appService.get_searchEvent(term).subscribe((res) => {
+    this.appService.get_searchEvent(term, this.isEditable).subscribe((res) => {
       this.event_list = res;
     });
   }
@@ -148,5 +161,11 @@ export class EventPage implements OnInit {
 
   toAttend(id) {
     this.navCtrl.navigateForward(`attend/${id}`);
+  }
+
+  loadAttendingEvents(){
+    this.appService.get_listAttending().subscribe((res)=>{
+      console.log(res);
+    });
   }
 }

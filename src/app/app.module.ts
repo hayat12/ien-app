@@ -27,7 +27,6 @@ import { File } from '@ionic-native/file/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { EventDetailsPage } from './screens/tab-pages/home/event-details.page';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClientJsonpModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -50,10 +49,13 @@ import { AttendPage } from './screens/tab-pages/home/attend.page';
 import { GlobalEventList } from './screens/tab-pages/home/g-event-list.page';
 import { Loader } from './share/components/loader';
 import { ListAgendaComponent } from './screens/tab-pages/calendar/agenda-list.component';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+// import { NgCalendarModule  } from 'ionic2-calendar';
+// import { CalendarModule } from "ion2-calendar";
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-
+// last version 7.0.7
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,6 +93,7 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   imports: [
     MbscModule,
+    // CalendarModule,
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
@@ -113,6 +116,7 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     Camera,
     File,
+    SocialSharing,
     FileChooser,
     GooglePlus,
     FilePath,

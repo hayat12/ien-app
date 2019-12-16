@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Events } from '@ionic/angular';
 import { AppService } from '../../app.service';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog/ngx';
@@ -55,6 +54,8 @@ export class CreateProfilePage implements OnInit {
     private fb: FormBuilder,
     private fileChooser: FileChooser,
     private location: Location,
+    public events: Events,
+    private camera: Camera,
     private appService: AppService
   ) {
 
@@ -69,15 +70,9 @@ export class CreateProfilePage implements OnInit {
   getUserDetails() {
     this.appService.getUserDetails().subscribe(
       (res: any) => {
-        this.fGroup.patchValue(
-          {
-            id: res.id,
-            first_name: res.first_name,
-            last_name: res.last_name,
-            email: res.email,
-          });
-          this.get_currentUser(res.id);
-          this.spinnerDialog.hide();
+        this.userDetails = res
+      this.patchUserInfo(res)
+      this.spinnerDialog.hide();
       },
       (error) => {
         this.spinnerDialog.hide();
@@ -97,24 +92,13 @@ export class CreateProfilePage implements OnInit {
       console.log('nothing');
     }
   }
-  get_currentUser(id) {
-    this.appService.get_currentUser(id).subscribe((res: any) => {
-      if (res.length > 0) {
-        const data = res[0];
-        this.userDetails = data;
-        this.imgUrl = data.picture;
-        this.patchUserInfo(data);
-      }
-      // if (data.picture !== undefined || data.picture !== null) {
-      //   this.imgUrl = data.picture;
-      // }
-    });
-  }
 
   patchUserInfo(data) {
     this.fGroup.patchValue(
       {
         id: data.id,
+        first_name: data.first_name,
+        last_name: data.last_name,
         email: data.email,
         phone: data.phone,
         picture: data.picture,
@@ -178,12 +162,12 @@ export class CreateProfilePage implements OnInit {
       position_held: data.position_held,
       sub_interest: JSON.stringify(this.subList)
     };
-    console.log(o);
     this.spinnerDialog.show();
     this.appService.queryUpdateProfile(o).subscribe(
       (res) => {
         this.resetStep();
         this.spinnerDialog.hide();
+        this.publishEvents();
         this.location.back();
       },
       (err) => {
@@ -194,27 +178,51 @@ export class CreateProfilePage implements OnInit {
   }
 
 
+  // chooseImage() {
+  //   this.fileChooser.open()
+  //   .then(uri => {
+  //     this.uploadFile(uri);
+  //   })
+  //   .catch(e => {
+  //     console.log(e);
+  //   });
+  // }
+
   chooseImage() {
-    this.fileChooser.open()
-    .then(uri => {
-      this.uploadFile(uri);
-    })
-    .catch(e => {
-      console.log(e);
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      encodingType: this.camera.EncodingType.JPEG,
+    }
+  
+    this.camera.getPicture(options).then((imageData) => {
+      this.uploadFile(imageData);
+    }, (err) => {
+      console.log(err);
     });
   }
+
   uploadFile(imgUri) {
+    const token = localStorage.getItem('ien_token');
+    if (_.isEmpty(token)) {
+      return;
+    }
     const fileTransfer: FileTransferObject = this.transfer.create();
     const options: FileUploadOptions = {
       fileKey: 'picture',
       fileName: 'picture',
       chunkedMode: false,
       mimeType: 'image/jpeg',
-      headers: {}
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
     };
-    fileTransfer.upload(imgUri, `${this.appService.baseUrl}/api/upload-image/${this.userDetails.id}`, options)
+
+    fileTransfer.upload(imgUri, `http://linkinnet.com/IENGlobal/public/api/upload-profile`, options)
       .then((data) => {
         this.getUserDetails();
+        this.publishEvents();
       }, (err) => {
         console.log(err);
       });
@@ -222,10 +230,10 @@ export class CreateProfilePage implements OnInit {
 
   blankImage(img) {
     let lb = null;
-    if (_.isEmpty(img)) {
+    if (_.isEmpty(img.picture)) {
       lb = this.APP_DEFAULT_ICON;
     } else {
-      lb = img;
+      lb = img.picture;
     }
     return lb;
   }
@@ -248,13 +256,17 @@ export class CreateProfilePage implements OnInit {
   subInterestChip(o) {
     const i = _.indexOf(this.subList, o);
     if (i < 0) {
-      this.subList.push(o);
-      this.sList.push(o.id);
+      // this.subList.push(o);
+      this.subList = _.concat(o);
+      // this.sList.push(o.id);
     } else {
       _.remove(this.subList, o);
     }
 }
 
+publishEvents(){
+  this.events.publish('uploadedProfile:created', 1, Date.now());
+}
 submitStep1() {
   this.isSubmittedStep1 = false;
   this.isSubmittedStep2 = true;

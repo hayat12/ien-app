@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { AppService } from '../../app.service';
 import { NavController, AlertController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
@@ -11,7 +11,7 @@ import * as moment from 'moment';
   styleUrls: ['./agenda-list.component.scss']
 })
 export class ListAgendaComponent implements OnInit {
-  adgList = [];
+  adgList: any = [];
   constructor(
     private fb: FormBuilder,
     public alertCtrl: AlertController,
@@ -19,9 +19,9 @@ export class ListAgendaComponent implements OnInit {
     private appService: AppService,
     private route: ActivatedRoute
   ) { }
-
+ 
   ngOnInit() {
-    this.loadAdgenda();
+    // this.loadAdgenda();
   }
   ionViewDidEnter() {
     this.loadAdgenda();

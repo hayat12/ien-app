@@ -10,9 +10,41 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
-        <ion-card-content>
-          <h1>Coming soon</h1>
-        </ion-card-content>
-      </ion-card>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-segment scrollable (ionChange)="myMonth($event.detail.value)">
+          <ion-segment-button  *ngFor = "let ms of MonthsName" [value]="ms.value">
+            <ion-label>{{ms.name}}</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-segment scrollable >
+          <ion-segment-button *ngFor = "let ds of mList" [value]="ds">
+            <ion-label>{{ds}}</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+
+    <ion-item class="item-label item ios in-list ion-focusable hydrated">
+      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+        <h2>Rey</h2>
+        <h3>I can handle myself</h3>
+        <p>You will remove these restraints and leave...</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
 </ion-content>
