@@ -64,7 +64,7 @@
     "font-awesome": "^4.7.0",
     "ion2-calendar": "^3.0.0-rc.0",
     "ionic": "^5.2.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "moment": "^2.24.0",
     "plugin": "0.3.3",
     "rxjs": "~6.3.3",
